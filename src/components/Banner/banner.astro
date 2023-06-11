@@ -1,0 +1,25 @@
+---
+import TextLoader from "../textLoader";
+import { Image, Picture } from '@astrojs/image/components';
+
+const textToLoadInParts = [
+    `Hello, I am Meher. A fullstack developer...`,
+    `This is my portfolio.`
+]
+const indexesToPauseAt = []
+let textToLoad = ''
+let lastIndex = 0
+for (let [index, text] of textToLoadInParts.entries()){
+    textToLoad += text
+    lastIndex = text.length + lastIndex
+    indexesToPauseAt.push(lastIndex)
+}
+const textToLoadArr = Array.from(textToLoad)
+---
+
+<div class="flex items-center md:flex-row flex-col">
+    <Image class="md:order-2" src="/gif.gif" alt="programmer_gif.gif" width={200} height={200}/>
+    <div class="md:w-[500px]">
+        <TextLoader text={textToLoadArr} indexes={indexesToPauseAt} client:only="'react"/>
+    </div>
+</div>
