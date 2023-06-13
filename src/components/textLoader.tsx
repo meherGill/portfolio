@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { $isIntroDone } from "@stores/store";
 
 export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
     const indexRef = useRef(1);
@@ -7,7 +8,7 @@ export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
     const cursorRef = useRef<HTMLSpanElement>(null);
 
     const setIntervalAgain = () => {
-        setAnimationToSpin();
+        removeBlinkAnimation();
         intervalRef.current = setInterval(() => {
             setTextToDisplay((textToDisplay) => {
                 let potentialNewLine = "";
@@ -27,11 +28,11 @@ export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
         if (cursorRef.current) clearInterval(intervalRef.current);
     };
 
-    const setAnimationToBounce = () => {
+    const setAnimationToBlink = () => {
         cursorRef.current?.classList.add("animate-cursorblink");
     };
 
-    const setAnimationToSpin = () => {
+    const removeBlinkAnimation = () => {
         cursorRef.current?.classList.remove("animate-cursorblink");
     };
     useEffect(() => {
@@ -45,26 +46,30 @@ export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
 
     useEffect(() => {
         if (textToDisplay.length >= text.length + 2 * (indexes.length - 1)) {
+            //completely stop animation
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
-            setAnimationToBounce();
+            setAnimationToBlink();
+            $isIntroDone.set(true);
         } else if (indexes.includes(indexRef.current)) {
             clearIntervalAgain();
-            setAnimationToBounce();
+            setAnimationToBlink();
             setTimeout(() => {
                 setIntervalAgain();
-            }, 1000);
+            }, 500);
         }
     }, [textToDisplay]);
 
     return (
-        <h2 className="font-['Press_Start_2P'] whitespace-pre-wrap">
-            {textToDisplay}
-            <span
-                ref={cursorRef}
-                className={`bg-gray-100 h-5 w-2 inline-block ml-2`}
-            ></span>
-        </h2>
+        <>
+            <h2 className="font-['Press_Start_2P'] whitespace-pre-wrap">
+                {textToDisplay}
+                <span
+                    ref={cursorRef}
+                    className={`bg-base-content h-5 w-2 inline-block ml-2`}
+                ></span>
+            </h2>
+        </>
     );
 };

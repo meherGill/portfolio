@@ -1,10 +1,11 @@
 ---
 import TextLoader from "../textLoader";
-import { Image, Picture } from '@astrojs/image/components';
+import { Image } from '@astrojs/image/components';
 
 const textToLoadInParts = [
     `Hello, I am Meher. A fullstack developer...`,
-    `This is my portfolio.`
+    `This is the entrance to my portfolio.`,
+    'Which door would you like to choose?'
 ]
 const indexesToPauseAt = []
 let textToLoad = ''
@@ -17,9 +18,48 @@ for (let [index, text] of textToLoadInParts.entries()){
 const textToLoadArr = Array.from(textToLoad)
 ---
 
-<div class="flex items-center md:flex-row flex-col">
-    <Image class="md:order-2" src="/gif.gif" alt="programmer_gif.gif" width={200} height={200}/>
-    <div class="md:w-[500px]">
-        <TextLoader text={textToLoadArr} indexes={indexesToPauseAt} client:only="'react"/>
+<div id="#banner" class="flex items-center lg:flex-row flex-col justify-center">
+    <div class="sprite-animation-container lg:order-2 relative">
+        <div class="character-spritesheet relative right-20 top-20" >
+            <img src="./programming_spritesheet.png" alt="programmer_gif.gif" />
+        </div>
+    </div>
+    <div class="lg:w-[500px] w-[300px] min-h-16">
+        <TextLoader text={textToLoadArr} indexes={indexesToPauseAt} client:only="react"/>
     </div>
 </div>
+
+<style lang="scss">
+    :root {
+        --pixel-size: 8;
+        --image-dim: 64px;
+    }
+    .sprite-animation-container {
+        width: calc(var(--image-dim)*var(--pixel-size));
+        height: calc(var(--image-dim)*var(--pixel-size));
+        overflow: hidden;
+    }
+
+    @keyframes moveSpritesheet {
+        from {
+            transform: translate3d(0px, 0,0)
+        }
+        to {
+            transform: translate3d(-100%,0,0);
+        }
+    }
+    .character-spritesheet {
+        animation: moveSpritesheet 2s steps(7) infinite; 
+        width: calc(var(--image-dim)*var(--pixel-size)*7);
+        height: calc(var(--image-dim)*var(--pixel-size));
+        
+    }
+
+    .character-spritesheet > img {
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+    }
+
+    
+</style>
