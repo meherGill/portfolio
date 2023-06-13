@@ -466,6 +466,16 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.17.19.tgz#8cfaf2ff603e9aabb910e9c0558c26cf32744061"
   integrity sha512-lAhycmKnVOuRYNtRtatQR1LPQf2oYCkRGkSFnseDAKPl8lu5SOsK/e1sXe5a0Pc5kHIHe6P2I/ilntNv2xf3cA==
 
+"@fontsource-variable/montserrat@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/montserrat/-/montserrat-5.0.4.tgz#d472d6432f0f27f566bb71b35f21eb8b7980f1d0"
+  integrity sha512-fxr8pwfWV21MacFRmo/SE/shMNbMBc1vqinGFc7bb49xUlCl/+o4+S1pQoj/NMtJU+DF+mGhQz5ozN6u3SGiEQ==
+
+"@fontsource-variable/raleway@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/raleway/-/raleway-5.0.4.tgz#dad1e64520d7c3b51a37089d310bb9712f9b1435"
+  integrity sha512-Ih4r5p4+DZbsy0EthifNAy6xpFF0P+Laxm2IUqY+juFuyygqjyRR3SLcvTqjwOv/AzT5n4mEvNys4kIqx6zf8A==
+
 "@fontsource/press-start-2p@^5.0.3":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@fontsource/press-start-2p/-/press-start-2p-5.0.3.tgz#ebd81b87a34aa26e524052d2810d24688d0d6a74"

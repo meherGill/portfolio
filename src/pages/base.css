@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .defaultBackShadow {
+        box-shadow: rgba(0, 0, 0, .5) 0 0px 75px 20px inset;
+    }
+
+    .mediumBackShadow {
+        box-shadow: rgba(0, 0, 0, .5) 0 0px 500px 50px inset;
+    }
+
+}

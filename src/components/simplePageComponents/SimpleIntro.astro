@@ -1,0 +1,24 @@
+---
+import { Image } from '@astrojs/image/components';
+import '@fontsource-variable/raleway';
+---
+
+<div class="flex flex-col items-center justify-center pt-20 contained m-auto">
+    <Image src="./programmer_gif.gif" alt="programmer_gif" height={500} aspectRatio={4/3}/>
+    <header class="text-center">
+        <h1 class="text-4xl md:text-5xl tracking-wider animate-slideFromLeft">Javascript Engineer</h1>
+        <div class="divider before:h-1 before:bg-slate-600 after:h-1 after:bg-pink-700 animate-slideFromRight" />
+    </header>
+    <p class="p-2 px-5 animate-grow text-center md:leading-loose md:text-2xl md:animate-growMd">
+        Greetings, fellow coding adventurer, potential recruiter?? or a lost wanderer! 
+        I'm Meher, an <strong>app-dev</strong> and a perpetual learner, which is implied if I have to keep up with YET ANOTHER NEW #$#@%@ FRAMEWORK.
+        <br />
+        So, come along, scroll down the extremely shallow rabbit hole
+    </p>
+</div>
+
+<style>
+    h1 {
+        font-family: 'Raleway Variable', sans-serif;
+    }
+</style>

@@ -33,12 +33,53 @@ module.exports = {
                         transform: "translateX(0px)",
                     },
                 },
+
+                slideFromRight: {
+                    from: {
+                        transform: "translateX(2000px)",
+                    },
+
+                    to: {
+                        transform: "translateX(0px)",
+                    },
+                },
+
+                grow: {
+                    from: {
+                        height: "0px",
+                        width: "0px",
+                        fontSize: "0px",
+                    },
+
+                    to: {
+                        height: "100%",
+                        width: "100%",
+                        fontSize: "1.125rem",
+                    },
+                },
+
+                growMd: {
+                    from: {
+                        height: "0px",
+                        width: "0px",
+                        fontSize: "0px",
+                    },
+
+                    to: {
+                        height: "100%",
+                        width: "100%",
+                        fontSize: "1.5rem",
+                    },
+                },
             },
             animation: {
                 cursorblink: "cursorblink 0.5s infinite",
-                apparate: "apparate 1s",
+                apparate: "apparate 3s",
                 chaotic: "chaotic 2.2s",
-                slideFromLeft: "slideFromLeft 1.5s",
+                slideFromLeft: "slideFromLeft 1.2s",
+                slideFromRight: "slideFromRight 1.2s",
+                grow: "grow 1.2s",
+                growMd: "growMd 1.2s",
             },
         },
     },

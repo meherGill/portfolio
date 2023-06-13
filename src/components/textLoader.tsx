@@ -57,7 +57,7 @@ export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
             setAnimationToBlink();
             setTimeout(() => {
                 setIntervalAgain();
-            }, 500);
+            }, 200);
         }
     }, [textToDisplay]);
 
