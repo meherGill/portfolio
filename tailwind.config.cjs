@@ -46,29 +46,11 @@ module.exports = {
 
                 grow: {
                     from: {
-                        height: "0px",
-                        width: "0px",
-                        fontSize: "0px",
+                        transform: "scale(0)",
                     },
 
                     to: {
-                        height: "100%",
-                        width: "100%",
-                        fontSize: "1.125rem",
-                    },
-                },
-
-                growMd: {
-                    from: {
-                        height: "0px",
-                        width: "0px",
-                        fontSize: "0px",
-                    },
-
-                    to: {
-                        height: "100%",
-                        width: "100%",
-                        fontSize: "1.5rem",
+                        transform: "scale(1)",
                     },
                 },
             },
@@ -79,7 +61,6 @@ module.exports = {
                 slideFromLeft: "slideFromLeft 1.2s",
                 slideFromRight: "slideFromRight 1.2s",
                 grow: "grow 1.2s",
-                growMd: "growMd 1.2s",
             },
         },
     },

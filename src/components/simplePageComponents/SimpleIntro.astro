@@ -1,24 +1,228 @@
 ---
-import { Image } from '@astrojs/image/components';
-import '@fontsource-variable/raleway';
+import { Image } from "@astrojs/image/components";
+import "@fontsource-variable/raleway";
 ---
 
-<div class="flex flex-col items-center justify-center pt-20 contained m-auto">
-    <Image src="./programmer_gif.gif" alt="programmer_gif" height={500} aspectRatio={4/3}/>
+<div
+    class="flex flex-col items-center justify-center pt-10 lg contained m-auto"
+>
+    <Image
+        src="./programmer_gif.gif"
+        alt="programmer_gif"
+        height={200}
+        aspectRatio={4 / 3}
+    />
     <header class="text-center">
-        <h1 class="text-4xl md:text-5xl tracking-wider animate-slideFromLeft">Javascript Engineer</h1>
-        <div class="divider before:h-1 before:bg-slate-600 after:h-1 after:bg-pink-700 animate-slideFromRight" />
+        <h1 class="text-3xl tracking-wider animate-slideFromLeft">
+            Javascript Engineer
+        </h1>
+        <div
+            class="divider before:h-1 before:bg-yellow-300 after:h-1 after:bg-[#8474cf] animate-slideFromRight"
+        >
+        </div>
     </header>
-    <p class="p-2 px-5 animate-grow text-center md:leading-loose md:text-2xl md:animate-growMd">
-        Greetings, fellow coding adventurer, potential recruiter?? or a lost wanderer! 
-        I'm Meher, an <strong>app-dev</strong> and a perpetual learner, which is implied if I have to keep up with YET ANOTHER NEW #$#@%@ FRAMEWORK.
+    <p class="p-2 px-5 animate-grow text-center leading-loose max-w-[500px]">
+        Greetings, fellow coding adventurer, potential recruiter?? or a lost
+        wanderer! I'm Meher, an <strong>app-dev</strong> and a perpetual learner,
+        which is implied if I have to keep up with YET ANOTHER NEW #$#@%@ FRAMEWORK.
         <br />
-        So, come along, scroll down the extremely shallow rabbit hole
+        So, come along, scroll down the page long rabbit hole
     </p>
+    <div class="rabbit-container-top w-full absolute bottom-0 left-0">
+        <div class="rabbit-container contianer w-full h-fit m-auto">
+            <div class="rabbit z-10">
+                <div class="rabbit-body bg-stone-300"></div>
+                <div class="rabbit-head bg-stone-300">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="ear left"></div>
+                    <div class="ear right"></div>
+                    <div class="nose"></div>
+                </div>
+            </div>
+            <div class="pipe z-20">
+                <div class="paw left"></div>
+                <div class="paw right"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style>
-    h1 {
-        font-family: 'Raleway Variable', sans-serif;
+    :root {
+        --rbt-height: 150px;
+        --rbt-width: 80px;
+
+        --rbt-head-height: 40px;
+        --rbt-head-width: 50px;
+
+        --rbt-body-width: 60px;
+        --rbt-body-height: 80px;
+
+        --rbt-eye-height: 8px;
+        --rbt-eye-width: 8px;
+
+        --rbt-nose-dim: 5px;
+
+        --rbt-ear-height: 25px;
+        --rbt-ear-width: 5px;
+
+        --pipe-height: calc(var(--rbt-height) / 2 + 100vh);
+        --pipe-width: calc(var(--rbt-width) + 10px);
+    }
+
+    .pipe {
+        position: absolute;
+        width: var(--pipe-width);
+        height: var(--pipe-height);
+
+        background: linear-gradient(
+            to right,
+            #142e16 0%,
+            #579c66,
+            #579c66,
+            #6dad7b,
+            #e9ffe8,
+            #9dd591,
+            #6bb765,
+            #142e16 100%
+        );
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(-1 * var(--rbt-height) / 1.75);
+    }
+
+    .pipe::before {
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        content: "";
+        display: block;
+        width: calc(var(--pipe-width) + 20px);
+        height: 10px;
+        background: linear-gradient(
+            to right,
+            #142e16 0%,
+            #457c51,
+            #4b8658,
+            #5f976b,
+            #d3e7d2,
+            #8dbf82,
+            #61a75c,
+            #142e16 100%
+        );
+        border-radius: 5px;
+    }
+
+    .rabbit {
+        position: absolute;
+        top: calc(-1 * var(--rbt-height));
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--rbt-width);
+        height: var(--rbt-height);
+    }
+
+    .rabbit-head {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--rbt-head-height);
+        height: var(--rbt-head-width);
+        border-radius: 30% 30% 50% 50%;
+        border-bottom: 2.5px solid #c4c6ce;
+    }
+
+    .rabbit-body {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--rbt-body-width);
+        height: var(--rbt-body-height);
+        border-radius: 50% 50% 0 0;
+        top: calc(var(--rbt-head-height) / 4 * 3);
+    }
+
+    .eye {
+        position: absolute;
+        top: calc(var(--rbt-head-height) / 3);
+        background-color: black;
+        border-radius: 50%;
+        height: var(--rbt-eye-height);
+        width: var(--rbt-eye-width);
+        border: 2px solid green;
+    }
+
+    .eye.left {
+        left: calc(var(--rbt-head-width) / 8);
+    }
+
+    .eye.right {
+        right: calc(var(--rbt-head-width) / 8);
+    }
+
+    .eye::after {
+        content: "";
+        position: absolute;
+        width: calc(var(--rbt-eye-width) / 4);
+        height: calc(var(--rbt-eye-height) / 4);
+        background: white;
+        border-radius: 50%;
+        bottom: 0;
+    }
+
+    .ear {
+        box-sizing: content-box;
+        position: absolute;
+        width: var(--rbt-ear-width);
+        height: var(--rbt-ear-height);
+        top: calc(-1 * var(--rbt-ear-height));
+        background: #fa789f;
+        border-radius: 50% 50% 0 0;
+        border: 4px solid rgb(214 211 209);
+    }
+
+    .ear.left {
+        transform: rotate(-20deg);
+        transform-origin: bottom right;
+    }
+
+    .ear.right {
+        transform: rotate(70deg);
+        transform-origin: bottom right;
+        right: 5px;
+        top: calc(-1 * var(--rbt-ear-height) + 5px);
+    }
+
+    .nose {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: var(--rbt-nose-dim) solid transparent;
+        border-right: var(--rbt-nose-dim) solid transparent;
+        border-top: var(--rbt-nose-dim) solid #fa789f;
+    }
+
+    .paw {
+        position: absolute;
+        width: calc(var(--rbt-body-width) / 4);
+        height: calc(var(--rbt-body-width) / 5);
+        background: rgb(214 211 209);
+        background: rgb(231, 229, 227);
+        border-radius: 30% 30% 50% 50%;
+        border-top: 1vmin solid #b9bbc3;
+        top: -5px;
+    }
+
+    .paw.left {
+        left: 12px;
+    }
+
+    .paw.right {
+        right: 12px;
     }
 </style>
