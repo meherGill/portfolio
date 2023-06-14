@@ -4,27 +4,34 @@ import TextLoader from "../textLoader";
 const textToLoadInParts = [
     `Hello, I am Meher. A fullstack developer...`,
     `This is the entrance to my portfolio.`,
-    'Which door would you like to choose?'
-]
-const indexesToPauseAt = []
-let textToLoad = ''
-let lastIndex = 0
-for (let [index, text] of textToLoadInParts.entries()){
-    textToLoad += text
-    lastIndex = text.length + lastIndex
-    indexesToPauseAt.push(lastIndex)
+    "Which door would you like to choose?",
+];
+const indexesToPauseAt = [];
+let textToLoad = "";
+let lastIndex = 0;
+for (let [index, text] of textToLoadInParts.entries()) {
+    textToLoad += text;
+    lastIndex = text.length + lastIndex;
+    indexesToPauseAt.push(lastIndex);
 }
-const textToLoadArr = Array.from(textToLoad)
+const textToLoadArr = Array.from(textToLoad);
 ---
 
 <div id="#banner" class="flex items-center lg:flex-row flex-col justify-center">
     <div class="sprite-animation-container lg:order-2 relative">
-        <div class="character-spritesheet relative right-20 top-20" >
-            <img src="./programming_spritesheet.png" alt="programmer_gif.gif" />
+        <div class="character-spritesheet relative right-20 top-20">
+            <img
+                src="./programming_spritesheet_new.png"
+                alt="programmer_gif.gif"
+            />
         </div>
     </div>
     <div class="lg:w-[500px] w-[300px] min-h-16">
-        <TextLoader text={textToLoadArr} indexes={indexesToPauseAt} client:only="react"/>
+        <TextLoader
+            text={textToLoadArr}
+            indexes={indexesToPauseAt}
+            client:only="react"
+        />
     </div>
 </div>
 
@@ -34,24 +41,23 @@ const textToLoadArr = Array.from(textToLoad)
         --image-dim: 64px;
     }
     .sprite-animation-container {
-        width: calc(var(--image-dim)*var(--pixel-size));
-        height: calc(var(--image-dim)*var(--pixel-size));
+        width: calc(var(--image-dim) * var(--pixel-size));
+        height: calc(var(--image-dim) * var(--pixel-size));
         overflow: hidden;
     }
 
     @keyframes moveSpritesheet {
         from {
-            transform: translate3d(0px, 0,0)
+            transform: translate3d(0px, 0, 0);
         }
         to {
-            transform: translate3d(-100%,0,0);
+            transform: translate3d(-100%, 0, 0);
         }
     }
     .character-spritesheet {
-        animation: moveSpritesheet 2s steps(7) infinite; 
-        width: calc(var(--image-dim)*var(--pixel-size)*7);
-        height: calc(var(--image-dim)*var(--pixel-size));
-        
+        animation: moveSpritesheet 2s steps(7) infinite;
+        width: calc(var(--image-dim) * var(--pixel-size) * 7);
+        height: calc(var(--image-dim) * var(--pixel-size));
     }
 
     .character-spritesheet > img {
@@ -59,6 +65,4 @@ const textToLoadArr = Array.from(textToLoad)
         height: 100%;
         image-rendering: pixelated;
     }
-
-    
 </style>

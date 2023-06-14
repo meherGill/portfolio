@@ -4,7 +4,7 @@ import "@fontsource-variable/raleway";
 ---
 
 <div
-    class="flex flex-col items-center justify-center pt-10 lg contained m-auto"
+    class="flex flex-col items-center justify-center pt-10 lg m-auto h-screen w-screen"
 >
     <Image
         src="./programmer_gif.gif"
@@ -28,29 +28,27 @@ import "@fontsource-variable/raleway";
         <br />
         So, come along, scroll down the page long rabbit hole
     </p>
-    <div class="rabbit-container-top w-full absolute bottom-0 left-0">
-        <div class="rabbit-container contianer w-full h-fit m-auto">
-            <div class="rabbit z-10">
-                <div class="rabbit-body bg-stone-300"></div>
-                <div class="rabbit-head bg-stone-300">
-                    <div class="eye left"></div>
-                    <div class="eye right"></div>
-                    <div class="ear left"></div>
-                    <div class="ear right"></div>
-                    <div class="nose"></div>
-                </div>
-            </div>
-            <div class="pipe z-20">
-                <div class="paw left"></div>
-                <div class="paw right"></div>
+    <!-- <div class="rabbit-container w-full h-fit m-auto absolute bottom-0">
+        <div class="rabbit z-10">
+            <div class="rabbit-body"></div>
+            <div class="rabbit-head">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="nose"></div>
             </div>
         </div>
-    </div>
+        <div class="pipe z-20">
+            <div class="paw left"></div>
+            <div class="paw right"></div>
+        </div>
+    </div> -->
 </div>
 
-<style>
+<!-- <style>
     :root {
-        --rbt-height: 150px;
+        --rbt-height: 30px;
         --rbt-width: 80px;
 
         --rbt-head-height: 40px;
@@ -67,10 +65,26 @@ import "@fontsource-variable/raleway";
         --rbt-ear-height: 25px;
         --rbt-ear-width: 5px;
 
-        --pipe-height: calc(var(--rbt-height) / 2 + 100vh);
+        --pipe-height: calc(var(--rbt-height) + 100px);
         --pipe-width: calc(var(--rbt-width) + 10px);
     }
 
+    @keyframes rabbitBobUpDown {
+        0% {
+            top: calc(-1 * var(--rbt-height) - 20px);
+        }
+        25% {
+            top: calc(-1 * var(--rbt-height) + 10px);
+        }
+
+        50% {
+            top: calc(-1 * var(--rbt-height) + 40px);
+        }
+
+        100% {
+            top: calc(-1 * var(--rbt-height) - 20px);
+        }
+    }
     .pipe {
         position: absolute;
         width: var(--pipe-width);
@@ -78,14 +92,15 @@ import "@fontsource-variable/raleway";
 
         background: linear-gradient(
             to right,
-            #142e16 0%,
-            #579c66,
-            #579c66,
-            #6dad7b,
-            #e9ffe8,
-            #9dd591,
-            #6bb765,
-            #142e16 100%
+            #022b39 0%,
+            #015f7f,
+            #206177,
+            #3a8ca7,
+            #89b5c4,
+            #81b6c8,
+            #3a8ca7,
+            #015f7f,
+            #022b39 100%
         );
         left: 50%;
         transform: translateX(-50%);
@@ -111,6 +126,17 @@ import "@fontsource-variable/raleway";
             #61a75c,
             #142e16 100%
         );
+        background: linear-gradient(
+            to right,
+            #01171e 0%,
+            #014157,
+            #133a47,
+            #296578,
+            #658691,
+            #5f8693,
+            #286072,
+            #003a4d 100%
+        );
         border-radius: 5px;
     }
 
@@ -121,6 +147,7 @@ import "@fontsource-variable/raleway";
         transform: translateX(-50%);
         width: var(--rbt-width);
         height: var(--rbt-height);
+        animation: rabbitBobUpDown 4s infinite;
     }
 
     .rabbit-head {
@@ -132,6 +159,7 @@ import "@fontsource-variable/raleway";
         height: var(--rbt-head-width);
         border-radius: 30% 30% 50% 50%;
         border-bottom: 2.5px solid #c4c6ce;
+        background: radial-gradient(rgb(177, 175, 174), rgb(214 211 209));
     }
 
     .rabbit-body {
@@ -142,6 +170,12 @@ import "@fontsource-variable/raleway";
         height: var(--rbt-body-height);
         border-radius: 50% 50% 0 0;
         top: calc(var(--rbt-head-height) / 4 * 3);
+        background: linear-gradient(
+            to right,
+            rgb(214 211 209),
+            rgb(177, 175, 174),
+            rgb(214 211 209)
+        );
     }
 
     .eye {
@@ -225,4 +259,4 @@ import "@fontsource-variable/raleway";
     .paw.right {
         right: 12px;
     }
-</style>
+</style> -->
