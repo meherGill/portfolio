@@ -1,6 +1,6 @@
 ---
-import '@fontsource/press-start-2p';
-import { $theme } from '../stores/store';
+import "@fontsource/press-start-2p";
+import { $theme } from "../stores/store";
 export interface Props {
 	title: string;
 }
@@ -8,63 +8,74 @@ const { title } = Astro.props;
 ---
 
 <script>
-import { $theme } from "@stores/store"
+	import { $theme } from "@stores/store";
 
-	const themeChangerButton = document.querySelector("#themeChanger") as HTMLInputElement
-	themeChangerButton.addEventListener("change" , function(){
-		if (this.checked){
-			this.classList.remove("unchecked")
-			$theme.set("night")
-
+	const themeChangerButton = document.querySelector(
+		"#themeChanger"
+	) as HTMLInputElement;
+	themeChangerButton.addEventListener("change", function () {
+		if (this.checked) {
+			this.classList.remove("unchecked");
+			$theme.set("night");
+		} else {
+			this.classList.add("unchecked");
+			$theme.set("garden");
 		}
-		else{
-			this.classList.add("unchecked")
-			$theme.set("garden")
-		}
-	})
-	$theme.subscribe(val => {
-		document.documentElement.setAttribute("data-theme", val)
-	})
+	});
+	$theme.subscribe((val) => {
+		document.documentElement.setAttribute("data-theme", val);
+	});
 </script>
 
-<!DOCTYPE html>
 <html lang="en" data-theme={$theme.value ?? "night"}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Portfolio site for Meher gill, a frontend / fullstack web dev">
+		<meta
+			name="description"
+			content="Portfolio site for Meher gill, a frontend / fullstack web dev"
+		/>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<div  class="absolute right-10 top-10 flex flex-col items-center">
-			<input id="themeChanger" type="checkbox" class="toggle toggle-primary mb-3" checked />
+		<div class="absolute right-10 top-10 flex flex-col items-center">
+			<input
+				id="themeChanger"
+				type="checkbox"
+				class="toggle toggle-primary mb-3"
+				checked
+			/>
 			<label for="themeChanger">Change Theme</label>
 		</div>
 		<slot />
 	</body>
 </html>
 <style is:global>
-
 	* {
 		box-sizing: border-box;
 	}
 	:root {
 		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			#da62c4 30%,
+			white 60%
+		);
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
+		background-color: #f6f6f6;
 	}
 	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+			DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 	}
 
 	.pixelated {
-		image-rendering: pixelated
+		image-rendering: pixelated;
 	}
 </style>
 <style>

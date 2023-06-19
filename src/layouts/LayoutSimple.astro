@@ -12,9 +12,14 @@ import "@fontsource-variable/montserrat";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<script is:inline>
+			const rootEl = document.documentElement;
+			rootEl.style.setProperty("--screenWidth", `${screen.width}`);
+			rootEl.style.setProperty("--screenHeight", `${screen.height}`);
+		</script>
 	</head>
 	<body>
-		<slot />
+		<slot name="main-slot" />
 	</body>
 </html>
 <style is:global>
@@ -30,6 +35,9 @@ import "@fontsource-variable/montserrat";
 			#da62c4 30%,
 			white 60%
 		);
+
+		--screenHeight: 0px;
+		--screenWidth: 0px;
 	}
 	html {
 		font-family: system-ui, sans-serif;

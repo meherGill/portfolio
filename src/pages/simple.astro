@@ -1,62 +1,279 @@
 ---
 import Layout from "../layouts/LayoutSimple.astro";
 import SimpleIntro from "../components/simplePageComponents/SimpleIntro.astro";
+import SimpleProjects from "../components/simplePageComponents/SimpleProjects.astro";
+import SimpleContact from "../components/simplePageComponents/SimpleContact.astro";
 import "./base.css";
+export interface Props {
+    sphereDim: string;
+}
+
+const sphereDim = 150;
+const sphereDimPx = `${sphereDim}px`;
 ---
 
-<script>
-    const mainElement = document.querySelector("main");
-    mainElement!.addEventListener("wheel", (ev) => {
-        ev.preventDefault(); // stop scrolling in another direction
-        mainElement!.scrollLeft += ev.deltaY + ev.deltaX;
-    });
-</script>
-
 <Layout title="simple portfolio">
-    <main class="overflow-y-scroll h-screen text-gray-200">
-        <div class="flex items-center justify-center fixed w-screen">
-            <nav
-                class="flex items-center z-10 w-screen justify-between m-auto mt-5 lg:mx-14 mx-2 contained"
+    <Fragment slot="main-slot">
+        <main class="relative text-stone-200 overflow-hidden h-screen w-screen">
+            <div class="fixed flex items-center justify-center w-screen z-50">
+                <nav
+                    class="flex items-center w-screen justify-between m-auto mt-5 lg:mx-14 mx-2 contained"
+                >
+                    <button
+                        class="btn btn-outline btn-primary cursor-pointer"
+                        id="preview-cv">Preview CV</button
+                    >
+                    <ul class="flex items-center justify-center [&>li]:mr-3">
+                        <li
+                            class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
+                        >
+                            About
+                        </li>
+                        <li
+                            class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
+                        >
+                            Projects
+                        </li>
+                        <li
+                            class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
+                        >
+                            Contact
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div
+                id="sphere"
+                class="sphere rounded-[50%] absolute sphere-initial"
             >
-                <button class="btn" id="preview-cv">Preview CV</button>
-                <ul class="flex items-center justify-center [&>li]:mr-3">
-                    <li
-                        class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
-                    >
-                        About
-                    </li>
-                    <li
-                        class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
-                    >
-                        Projects
-                    </li>
-                    <li
-                        class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
-                    >
-                        Contact
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div
-            class="flex overflow-y-visible defaultBackShadow md:mediumBackShadow bg-[#802200]"
-        >
-            <section class="intro h-screen w-screen">
+            </div>
+            <section id="about" class="about absolute hide">
                 <SimpleIntro />
             </section>
-            <div class="h-2 w-screen">
-                <h1 class="text-black">ABCDE</h1>
-            </div>
-        </div>
-    </main>
+            <section
+                id="projects"
+                class="projects absolute translate-x-[200vw]"
+            >
+                <SimpleProjects />
+            </section>
+            <section id="contact" class="projects absolute translate-x-[200vw]">
+                <SimpleContact />
+            </section>
+        </main>
+    </Fragment>
 </Layout>
 
-<style>
-    /* section {
-        scroll-snap-align: start;
+<style is:global>
+    h2.page-title {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 50px;
+        mix-blend-mode: difference;
+    }
+</style>
+
+<style define:vars={{ sphereDim: sphereDim, sphereDimPx: sphereDimPx }}>
+    .sphere-about {
+        transform: translateY(calc(45vh - var(--sphereDimPx) / 2));
+        margin-left: 50px;
     }
 
+    .sphere-projects {
+        transform: translateY(2.5rem)
+            translateX(calc(50vw - var(--sphereDimPx) / 2 - 90px))
+            rotate(425deg);
+    }
+
+    .sphere-contact {
+        transform: translateY(calc(50vh - var(--sphereDimPx) / 2 + 20px))
+            translateX(calc(100vw - var(--sphereDimPx) / 2 - 110px))
+            rotate(950deg);
+    }
+
+    .enter-in {
+        animation: enterin 1s;
+        animation-fill-mode: forwards;
+    }
+    .exit-out {
+        animation: exitout 1s;
+        animation-fill-mode: forwards;
+    }
     main {
-        scroll-snap-type: y mandatory;
-    } */
+        background: rgb(0, 0, 0);
+        position: relative;
+    }
+
+    #about {
+        transition: all 0.8s;
+    }
+    .hide {
+        transform: translateX(200vw);
+    }
+
+    .sphere-initial {
+        transform: translate(
+                calc(50vw - var(--sphereDimPx) / 2),
+                calc(50vh - var(--sphereDimPx) / 2)
+            )
+            scale(
+                calc(
+                    max(var(--screenHeight), var(--screenWidth)) /
+                        (var(--sphereDim))
+                )
+            )
+            rotate(60deg);
+    }
+
+    .sphere {
+        width: var(--sphereDimPx);
+        height: var(--sphereDimPx);
+        background: rgb(221, 213, 212);
+        border-radius: 50%;
+        animation-fill-mode: forwards;
+        transition: all 1s;
+        position: relative;
+    }
+
+    .sphere::after {
+        content: "";
+        height: var(--sphereDimPx);
+        width: 10px;
+        background-color: black;
+        display: block;
+        transform: rotate(45deg);
+        position: absolute;
+        top: -25px;
+        left: 30px;
+    }
+
+    .sphere::before {
+        content: "";
+        height: calc(var(--sphereDimPx) + 20px);
+        width: 10px;
+        background-color: black;
+        display: block;
+        transform: rotate(110deg);
+        position: absolute;
+        top: 40px;
+        left: 35px;
+    }
+    section {
+        height: 100%;
+        width: 100%;
+        animation-fill-mode: forwards;
+    }
 </style>
+
+<script>
+    const pages: Array<{ name: string; element: HTMLElement }> = [
+        { name: "about", element: document.getElementById("about")! },
+        { name: "projects", element: document.getElementById("projects")! },
+        { name: "contact", element: document.getElementById("contact")! },
+    ];
+
+    let currentPageIndex = 0;
+    const incrementCurrentPageIndex = () => {
+        let val = (currentPageIndex + 1) % pages.length;
+        currentPageIndex = val;
+        return val;
+    };
+
+    const decrementCurrentPageIndex = () => {
+        if (currentPageIndex <= 0) {
+            currentPageIndex = 2;
+        } else {
+            currentPageIndex--;
+        }
+        return currentPageIndex;
+    };
+    const mainElement = document.querySelector("main");
+
+    let timerTimeout: any;
+    let switchy = true;
+    let performLogic = true;
+    let abslastDeltaXY = 0;
+
+    let mainHeaderOver = false;
+    const handleElementToShow = (
+        pagesArr: typeof pages,
+        newPageToShow: (typeof pages)[0],
+        oldPage: (typeof pages)[0]
+    ) => {
+        document.getElementById(oldPage.name)!.classList.remove("enter-in");
+        document.getElementById(oldPage.name)!.classList.add("exit-out");
+        document.getElementById(oldPage.name)!.style.mixBlendMode =
+            "difference";
+
+        document
+            .getElementById(newPageToShow.name)!
+            .classList.remove("exit-out");
+        document.getElementById(newPageToShow.name)!.classList.add("enter-in");
+        document.getElementById(newPageToShow.name)!.style.mixBlendMode =
+            "difference";
+
+        const classToRemove = `sphere-${oldPage.name}`;
+        const classToAdd = `sphere-${newPageToShow.name}`;
+
+        document.getElementById("sphere")!.classList.remove(classToRemove);
+        document.getElementById("sphere")!.classList.add(classToAdd);
+    };
+
+    const transitionToNextSection = (
+        direction: number,
+        currentPageIndex: number,
+        pagesArr: typeof pages
+    ) => {
+        const oldPageIndex = currentPageIndex;
+        let newPageIndex;
+        if (direction > 0) {
+            newPageIndex = incrementCurrentPageIndex();
+            console.log("forwards", newPageIndex);
+        } else {
+            newPageIndex = decrementCurrentPageIndex();
+            console.log("backawrds", newPageIndex);
+        }
+
+        const newPageToShow = pagesArr[newPageIndex];
+        const oldPage = pagesArr[oldPageIndex];
+
+        handleElementToShow(pagesArr, newPageToShow, oldPage);
+    };
+
+    mainElement!.addEventListener("wheel", (ev) => {
+        ev.preventDefault(); // stop scrolling
+        const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
+        if (mainHeaderOver) {
+            if (absEvVal > 75) {
+                if (absEvVal > abslastDeltaXY) {
+                    switchy = true;
+                } else if (absEvVal < abslastDeltaXY && switchy) {
+                    clearTimeout(timerTimeout);
+                    if (performLogic) {
+                        console.log("run");
+                        transitionToNextSection(
+                            ev.deltaY + ev.deltaX,
+                            currentPageIndex,
+                            pages
+                        );
+                        performLogic = false;
+                    }
+
+                    timerTimeout = setTimeout(() => {
+                        switchy = false;
+                        performLogic = true;
+                    }, 200);
+                }
+                abslastDeltaXY = Math.abs(ev.deltaY + ev.deltaX);
+            }
+        } else {
+            document
+                .getElementById("sphere")!
+                .classList.remove("sphere-initial");
+            document.getElementById("sphere")!.classList.add("sphere-about");
+            document.getElementById("about")!.classList.remove("hide");
+            setTimeout(() => {
+                mainHeaderOver = true;
+            }, 1500);
+        }
+    });
+</script>
