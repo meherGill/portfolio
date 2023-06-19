@@ -13,54 +13,46 @@ const sphereDimPx = `${sphereDim}px`;
 ---
 
 <Layout title="simple portfolio">
-    <Fragment slot="main-slot">
-        <main class="relative text-stone-200 overflow-hidden h-screen w-screen">
-            <div class="fixed flex items-center justify-center w-screen z-50">
-                <nav
-                    class="flex items-center w-screen justify-between m-auto mt-5 lg:mx-14 mx-2 contained"
+    <main class="relative text-stone-200 overflow-hidden h-screen w-screen">
+        <div class="fixed flex items-center justify-center w-screen z-50">
+            <nav
+                class="flex items-center w-screen justify-between m-auto mt-5 lg:mx-14 mx-2 contained"
+            >
+                <button
+                    class="btn btn-outline btn-primary cursor-pointer"
+                    id="preview-cv">Preview CV</button
                 >
-                    <button
-                        class="btn btn-outline btn-primary cursor-pointer"
-                        id="preview-cv">Preview CV</button
+                <ul class="flex items-center justify-center [&>li]:mr-3">
+                    <li
+                        class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
                     >
-                    <ul class="flex items-center justify-center [&>li]:mr-3">
-                        <li
-                            class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
-                        >
-                            About
-                        </li>
-                        <li
-                            class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
-                        >
-                            Projects
-                        </li>
-                        <li
-                            class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
-                        >
-                            Contact
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div
-                id="sphere"
-                class="sphere rounded-[50%] absolute sphere-initial"
-            >
-            </div>
-            <section id="about" class="about absolute hide">
-                <SimpleIntro />
-            </section>
-            <section
-                id="projects"
-                class="projects absolute translate-x-[200vw]"
-            >
-                <SimpleProjects />
-            </section>
-            <section id="contact" class="projects absolute translate-x-[200vw]">
-                <SimpleContact />
-            </section>
-        </main>
-    </Fragment>
+                        About
+                    </li>
+                    <li
+                        class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
+                    >
+                        Projects
+                    </li>
+                    <li
+                        class="hover:border-b-orange-300 hover:border-b-2 cursor-pointer"
+                    >
+                        Contact
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id="sphere" class="sphere rounded-[50%] absolute sphere-initial">
+        </div>
+        <section id="about" class="about absolute translate-x-[200vw]">
+            <SimpleIntro />
+        </section>
+        <section id="projects" class="projects absolute translate-x-[200vw]">
+            <SimpleProjects />
+        </section>
+        <section id="contact" class="projects absolute translate-x-[200vw]">
+            <SimpleContact />
+        </section>
+    </main>
 </Layout>
 
 <style is:global>
@@ -73,6 +65,24 @@ const sphereDimPx = `${sphereDim}px`;
 </style>
 
 <style define:vars={{ sphereDim: sphereDim, sphereDimPx: sphereDimPx }}>
+    @keyframes enterin {
+        from {
+            transform: translate(200vw, 0);
+        }
+        to {
+            transform: translate(0, 0);
+        }
+    }
+
+    @keyframes exitout {
+        0% {
+            transform: translate(0, 0);
+        }
+
+        100% {
+            transform: translate(-120vw, 0);
+        }
+    }
     .sphere-about {
         transform: translateY(calc(45vh - var(--sphereDimPx) / 2));
         margin-left: 50px;
@@ -103,13 +113,6 @@ const sphereDimPx = `${sphereDim}px`;
         position: relative;
     }
 
-    #about {
-        transition: all 0.8s;
-    }
-    .hide {
-        transform: translateX(200vw);
-    }
-
     .sphere-initial {
         transform: translate(
                 calc(50vw - var(--sphereDimPx) / 2),
@@ -121,7 +124,7 @@ const sphereDimPx = `${sphereDim}px`;
                         (var(--sphereDim))
                 )
             )
-            rotate(60deg);
+            rotate(960deg);
     }
 
     .sphere {
@@ -165,6 +168,7 @@ const sphereDimPx = `${sphereDim}px`;
 </style>
 
 <script>
+    const sphereIdEl = document.getElementById("sphere");
     const pages: Array<{ name: string; element: HTMLElement }> = [
         { name: "about", element: document.getElementById("about")! },
         { name: "projects", element: document.getElementById("projects")! },
@@ -199,23 +203,21 @@ const sphereDimPx = `${sphereDim}px`;
         newPageToShow: (typeof pages)[0],
         oldPage: (typeof pages)[0]
     ) => {
-        document.getElementById(oldPage.name)!.classList.remove("enter-in");
-        document.getElementById(oldPage.name)!.classList.add("exit-out");
-        document.getElementById(oldPage.name)!.style.mixBlendMode =
-            "difference";
+        const oldPageRef = document.getElementById(oldPage.name);
+        const newPageRef = document.getElementById(newPageToShow.name)!;
+        oldPageRef!.classList.remove("enter-in");
+        oldPageRef!.classList.add("exit-out");
+        oldPageRef!.style.mixBlendMode = "difference";
 
-        document
-            .getElementById(newPageToShow.name)!
-            .classList.remove("exit-out");
-        document.getElementById(newPageToShow.name)!.classList.add("enter-in");
-        document.getElementById(newPageToShow.name)!.style.mixBlendMode =
-            "difference";
+        newPageRef!.classList.remove("exit-out");
+        newPageRef!.classList.add("enter-in");
+        newPageRef!.style.mixBlendMode = "difference";
 
         const classToRemove = `sphere-${oldPage.name}`;
         const classToAdd = `sphere-${newPageToShow.name}`;
 
-        document.getElementById("sphere")!.classList.remove(classToRemove);
-        document.getElementById("sphere")!.classList.add(classToAdd);
+        sphereIdEl!.classList.remove(classToRemove);
+        sphereIdEl!.classList.add(classToAdd);
     };
 
     const transitionToNextSection = (
@@ -266,11 +268,10 @@ const sphereDimPx = `${sphereDim}px`;
                 abslastDeltaXY = Math.abs(ev.deltaY + ev.deltaX);
             }
         } else {
-            document
-                .getElementById("sphere")!
-                .classList.remove("sphere-initial");
-            document.getElementById("sphere")!.classList.add("sphere-about");
-            document.getElementById("about")!.classList.remove("hide");
+            sphereIdEl!.classList.remove("sphere-initial");
+            sphereIdEl!.classList.add("sphere-about");
+            document.getElementById("about")!.classList.add("enter-in");
+            document.getElementById("about")!.style.mixBlendMode = "difference";
             setTimeout(() => {
                 mainHeaderOver = true;
             }, 1500);
