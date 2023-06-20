@@ -1,0 +1,34 @@
+<div class="card-container flex h-screen w-screen">
+    <div class="card h-full w-full">
+        <div
+            class="front-card absolute h-full w-full flex justify-center items-center"
+        >
+            <slot name="front-card" />
+        </div>
+        <div
+            class="back-card absolute h-full w-full flex justify-center items-center"
+        >
+            <slot name="back-card" />
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        /* transition: all 2s; */
+        transform-style: preserve-3d;
+        transition: all 1s;
+        transform-origin: left;
+    }
+    .front-card {
+        transition: all 1s;
+    }
+    .card-container:hover .card {
+        transform: rotateY(90deg);
+    }
+
+    .back-card {
+        transform: rotateY(270deg);
+        transform-origin: left;
+    }
+</style>
