@@ -26,6 +26,19 @@ import "@fontsource-variable/montserrat";
 	* {
 		box-sizing: border-box;
 		font-family: "Montserrat Variable", sans-serif;
+		@media (prefers-reduced-motion: reduce) {
+			*,
+			::before,
+			::after {
+				animation-delay: -1ms !important;
+				animation-duration: 1ms !important;
+				animation-iteration-count: 1 !important;
+				background-attachment: initial !important;
+				scroll-behavior: auto !important;
+				transition-duration: 0s !important;
+				transition-delay: 0s !important;
+			}
+		}
 	}
 	:root {
 		--accent: 124, 58, 237;
