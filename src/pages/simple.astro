@@ -50,30 +50,27 @@ const sphereDimPx = `${sphereDim}px`;
         >
         </div>
         <GlitchText textToShow={"SCROLL"} class="z-20" />
-        <section
-            id="about"
+
+        <CutCard
             class="about absolute z-[100] translate-x-[200vw] bg-black"
+            id="aboutCard"
         >
-            <CutCard id="aboutCard">
-                <SimpleIntro />
-            </CutCard>
-        </section>
-        <section
-            id="projects"
+            <SimpleIntro />
+        </CutCard>
+
+        <CutCard
+            id="projectsCard"
             class="projects absolute z-[90] translate-x-[200vw] bg-black"
         >
-            <CutCard id="projectsCard">
-                <SimpleProjects />
-            </CutCard>
-        </section>
-        <section
-            id="contact"
+            <SimpleProjects />
+        </CutCard>
+
+        <CutCard
+            id="contactCard"
             class="projects absolute z-[80] translate-x-[200vw] bg-black"
         >
-            <CutCard id="contactCard">
-                <SimpleContact />
-            </CutCard>
-        </section>
+            <SimpleContact />
+        </CutCard>
     </main>
 </Layout>
 
@@ -225,9 +222,15 @@ const sphereDimPx = `${sphereDim}px`;
 <script>
     const sphereIdEl = document.getElementById("sphere");
     const pages: Array<{ name: string; element: HTMLElement }> = [
-        { name: "about", element: document.getElementById("about")! },
-        { name: "projects", element: document.getElementById("projects")! },
-        { name: "contact", element: document.getElementById("contact")! },
+        { name: "aboutCard", element: document.getElementById("aboutCard")! },
+        {
+            name: "projectsCard",
+            element: document.getElementById("projectsCard")!,
+        },
+        {
+            name: "contactCard",
+            element: document.getElementById("contactCard")!,
+        },
     ];
 
     let currentPageIndex = 0;
@@ -257,12 +260,16 @@ const sphereDimPx = `${sphereDim}px`;
         newPageToShow: (typeof pages)[0],
         oldPage: (typeof pages)[0]
     ) => {
-        const oldPageCardRef = document.getElementById(`${oldPage.name}Card`);
+        const oldPageCardRef = document.getElementById(`${oldPage.name}`);
+        const oldPageCardRefCopy = document.getElementById(
+            `${oldPage.name}-copy`
+        );
         const newPageCardRef = document.getElementById(
-            `${newPageToShow.name}Card`
+            `${newPageToShow.name}`
         )!;
 
         oldPageCardRef!.classList.add("leave");
+        oldPageCardRefCopy!.classList.add("leave");
         // oldPageRef!.classList.remove("enter-in");
         // oldPageRef!.classList.add("exit-out");
 
@@ -326,9 +333,24 @@ const sphereDimPx = `${sphereDim}px`;
         } else {
             sphereIdEl!.classList.remove("sphere-initial", "z-10");
             sphereIdEl!.classList.add("sphere-about", "z-[999]");
-            document.getElementById("about")!.classList.add("enter-in");
-            document.getElementById("projects")!.classList.add("enter-in");
-            document.getElementById("contact")!.classList.add("enter-in");
+            document
+                .getElementById("aboutCard")!
+                .classList.remove("translate-x-[200vw]");
+            document
+                .getElementById("projectsCard")!
+                .classList.remove("translate-x-[200vw]");
+            document
+                .getElementById("contactCard")!
+                .classList.remove("translate-x-[200vw]");
+            document
+                .getElementById("aboutCard-copy")!
+                .classList.remove("translate-x-[200vw]");
+            document
+                .getElementById("projectsCard-copy")!
+                .classList.remove("translate-x-[200vw]");
+            document
+                .getElementById("contactCard-copy")!
+                .classList.remove("translate-x-[200vw]");
 
             const glitchTextEl = document.querySelector(
                 "h1.glitch"
