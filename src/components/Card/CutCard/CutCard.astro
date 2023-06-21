@@ -34,11 +34,29 @@ const { id, class: className } = Astro.props;
 </div>
 
 <style>
+    @keyframes leftKf {
+        45% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translate(-200vw, -10px);
+        }
+    }
+
+    @keyframes rightKf {
+        45% {
+            transform: translateY(10px);
+        }
+        100% {
+            transform: translate(200vw, 10px);
+        }
+    }
+
     .main-slot,
     .copy-slot {
         top: 0;
         left: 0;
-        transition: all 0.8s;
+        transition: 1s all;
     }
 
     .main-slot {
@@ -50,11 +68,13 @@ const { id, class: className } = Astro.props;
     }
 
     .leave.main-slot {
-        transform: translateX(-100vw) rotateY(90deg);
+        /* transform: translateX(-100vw) rotateY(90deg); */
+        animation: leftKf 1s linear forwards;
     }
 
     .leave.copy-slot {
-        transform: translateX(200vw) rotateY(90deg);
+        /* transform: translateX(200vw) rotateY(90deg); */
+        animation: rightKf 1s linear forwards;
     }
 
     /* .container.leave {

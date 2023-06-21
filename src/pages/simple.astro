@@ -3,7 +3,7 @@ import Layout from "../layouts/LayoutSimple.astro";
 import SimpleIntro from "../components/simplePageComponents/SimpleIntro.astro";
 import SimpleProjects from "../components/simplePageComponents/SimpleProjects.astro";
 import SimpleContact from "../components/simplePageComponents/SimpleContact.astro";
-import PageCard from "../components/Card/PageCard.astro";
+
 import GlitchText from "../components/GlitchText/GlitchText.astro";
 import CutCard from "../components/Card/CutCard/CutCard.astro";
 import "./base.css";
@@ -51,23 +51,20 @@ const sphereDimPx = `${sphereDim}px`;
         </div>
         <GlitchText textToShow={"SCROLL"} class="z-20" />
 
-        <CutCard
-            class="about absolute z-[100] translate-x-[200vw] bg-black"
-            id="aboutCard"
-        >
+        <CutCard class="about absolute z-[100] out bg-black" id="aboutCard">
             <SimpleIntro />
         </CutCard>
 
         <CutCard
             id="projectsCard"
-            class="projects absolute z-[90] translate-x-[200vw] bg-black"
+            class="projects absolute z-[90] out bg-slate-900"
         >
             <SimpleProjects />
         </CutCard>
 
         <CutCard
             id="contactCard"
-            class="projects absolute z-[80] translate-x-[200vw] bg-black"
+            class="projects absolute z-[80] out bg-stone-900"
         >
             <SimpleContact />
         </CutCard>
@@ -217,19 +214,21 @@ const sphereDimPx = `${sphereDim}px`;
     .page-card-big {
         scale: 1;
     }
+
+    .out {
+        transform: translateX(200vw);
+    }
 </style>
 
 <script>
     const sphereIdEl = document.getElementById("sphere");
-    const pages: Array<{ name: string; element: HTMLElement }> = [
-        { name: "aboutCard", element: document.getElementById("aboutCard")! },
+    const pages: Array<{ name: string }> = [
+        { name: "aboutCard" },
         {
             name: "projectsCard",
-            element: document.getElementById("projectsCard")!,
         },
         {
             name: "contactCard",
-            element: document.getElementById("contactCard")!,
         },
     ];
 
@@ -305,7 +304,7 @@ const sphereDimPx = `${sphereDim}px`;
     };
 
     mainElement!.addEventListener("wheel", (ev) => {
-        ev.preventDefault(); // stop scrolling
+        ev.preventDefault();
         const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
         if (mainHeaderOver) {
             if (absEvVal > 75) {
@@ -333,24 +332,10 @@ const sphereDimPx = `${sphereDim}px`;
         } else {
             sphereIdEl!.classList.remove("sphere-initial", "z-10");
             sphereIdEl!.classList.add("sphere-about", "z-[999]");
-            document
-                .getElementById("aboutCard")!
-                .classList.remove("translate-x-[200vw]");
-            document
-                .getElementById("projectsCard")!
-                .classList.remove("translate-x-[200vw]");
-            document
-                .getElementById("contactCard")!
-                .classList.remove("translate-x-[200vw]");
-            document
-                .getElementById("aboutCard-copy")!
-                .classList.remove("translate-x-[200vw]");
-            document
-                .getElementById("projectsCard-copy")!
-                .classList.remove("translate-x-[200vw]");
-            document
-                .getElementById("contactCard-copy")!
-                .classList.remove("translate-x-[200vw]");
+            const allOutElements = document.querySelectorAll(".out");
+            allOutElements!.forEach((el) => {
+                el.classList.remove("out");
+            });
 
             const glitchTextEl = document.querySelector(
                 "h1.glitch"
