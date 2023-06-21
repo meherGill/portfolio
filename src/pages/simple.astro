@@ -62,7 +62,7 @@ const sphereDimPx = `${sphereDim}px`;
             id="projects"
             class="projects absolute z-[90] translate-x-[200vw] bg-black"
         >
-            <CutCard id="projectCard">
+            <CutCard id="projectsCard">
                 <SimpleProjects />
             </CutCard>
         </section>
@@ -257,9 +257,12 @@ const sphereDimPx = `${sphereDim}px`;
         newPageToShow: (typeof pages)[0],
         oldPage: (typeof pages)[0]
     ) => {
-        const oldPageRef = document.getElementById(oldPage.name);
-        const newPageRef = document.getElementById(newPageToShow.name)!;
+        const oldPageCardRef = document.getElementById(`${oldPage.name}Card`);
+        const newPageCardRef = document.getElementById(
+            `${newPageToShow.name}Card`
+        )!;
 
+        oldPageCardRef!.classList.add("leave");
         // oldPageRef!.classList.remove("enter-in");
         // oldPageRef!.classList.add("exit-out");
 

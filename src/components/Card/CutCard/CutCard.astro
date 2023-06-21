@@ -35,11 +35,17 @@ const { id } = Astro.props;
         clip-path: polygon(100% 100%, 100% 0%, 0% 100%);
     }
 
-    .leave.main-slot {
-        transform: translateX(-100vw);
+    .container.leave .main-slot {
+        transform: translateX(-100vw) rotateY(90deg);
     }
 
-    .leave.copy-slot {
-        transform: translateX(100vw);
+    .container.leave .copy-slot {
+        transform: translateX(100vw) rotateY(90deg);
     }
+
+    .container.rotate {
+    }
+    /* .rotate {
+        transform: rotateY(90deg);
+    } */
 </style>
