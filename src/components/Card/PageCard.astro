@@ -1,4 +1,8 @@
-<div class="card-container flex h-screen w-screen">
+---
+const { class: className, id: idProp } = Astro.props;
+---
+
+<div id={idProp} class={`card-container flex h-screen w-screen ${className}`}>
     <div class="card h-full w-full">
         <div
             class="front-card absolute h-full w-full flex justify-center items-center"
@@ -23,12 +27,12 @@
     .front-card {
         transition: all 1s;
     }
-    .card-container:hover .card {
-        transform: rotateY(90deg);
-    }
-
     .back-card {
         transform: rotateY(270deg);
         transform-origin: left;
+    }
+
+    .rotate {
+        transform: rotateY(90deg);
     }
 </style>

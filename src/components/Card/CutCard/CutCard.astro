@@ -1,0 +1,45 @@
+---
+export interface Props {
+    id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div id=`${id}` class="w-full h-full container absolute">
+    <div
+        class="main-slot absolute w-full h-full flex justify-center items-center"
+    >
+        <slot />
+    </div>
+    <div
+        class="copy-slot absolute w-full h-full flex justify-center items-center"
+    >
+        <slot />
+    </div>
+</div>
+
+<style>
+    .main-slot,
+    .copy-slot {
+        top: 0;
+        left: 0;
+        transition: all 0.8s;
+    }
+
+    .main-slot {
+        clip-path: polygon(0 0, 100% 0%, 0% 100%);
+    }
+
+    .copy-slot {
+        clip-path: polygon(100% 100%, 100% 0%, 0% 100%);
+    }
+
+    .leave.main-slot {
+        transform: translateX(-100vw);
+    }
+
+    .leave.copy-slot {
+        transform: translateX(100vw);
+    }
+</style>

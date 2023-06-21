@@ -3,32 +3,37 @@ import { Image } from "@astrojs/image/components";
 import "@fontsource-variable/raleway";
 ---
 
-<div class="absolute left-0 top-[40vh] px-20">
-    <h2 class="page-title">About</h2>
-</div>
+<div class="h-screen w-screen">
+    <div class="absolute left-0 top-[40vh] px-20 mix-blend-difference">
+        <h2 class="page-title">About</h2>
+    </div>
 
-<div
-    class="w-full h-full flex flex-col justify-end md:justify-center items-center"
->
-    <header class="flex flex-col justify-center items-center text-center">
-        <h1 class="text-3xl tracking-wider animate-slideFromLeft">
-            Javascript Engineer
-        </h1>
-        <div
-            class="divider before:h-1 before:bg-yellow-300 after:h-1 after:bg-[#8474cf] animate-slideFromRight"
+    <div
+        class="w-full h-full flex flex-col justify-end md:justify-center items-center"
+    >
+        <header
+            class="flex flex-col justify-center items-center text-center relative md:left-32"
         >
-        </div>
+            <h1 class="text-3xl tracking-wider animate-slideFromLeft">
+                Javascript Engineer
+            </h1>
+            <div
+                class="divider before:h-1 before:bg-yellow-300 after:h-1 after:bg-[#8474cf] animate-slideFromRight"
+            >
+            </div>
 
-        <p
-            class="p-2 px-5 animate-grow text-center leading-loose max-w-[500px]"
-        >
-            Greetings, fellow coding adventurer, potential recruiter?? or a lost
-            wanderer! I'm Meher, an <strong>app-dev</strong> and a perpetual learner,
-            which is implied if I have to keep up with YET ANOTHER NEW #$#@%@ FRAMEWORK.
-            <br />
-            So, come along, scroll down the page long rabbit hole
-        </p>
-    </header>
+            <p
+                class="p-2 px-5 animate-grow text-center leading-loose max-w-[500px]"
+            >
+                Greetings, fellow coding adventurer, potential recruiter?? or a
+                lost wanderer! I'm Meher, an <strong>app-dev</strong> and a perpetual
+                learner, which is implied if I have to keep up with YET ANOTHER NEW
+                #$#@%@ FRAMEWORK.
+                <br />
+                So, come along, scroll down the page long rabbit hole
+            </p>
+        </header>
+    </div>
 </div>
 
 <style></style>
