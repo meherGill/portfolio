@@ -192,33 +192,43 @@ const sphereDimPx = `${sphereDim}px`;
         }
     }
 
+    /* @keyframes glitchSphereKeyframe {
+        0% {
+            transla
+        }
+    } */
     @keyframes glitchSphereKeyframe {
         0% {
-            translate: 0px;
-            box-shadow: inset 10px 0px 0px 0px rgb(210, 25, 55);
+            box-shadow: inset 2.5px 0px 0px 0px rgb(234, 199, 25),
+                inset 2.5px -1.5px 0px 0px rgb(210, 25, 195),
+                inset -5px 2.5px 0px 0px rgb(32, 42, 185);
         }
-        4% {
-            translate: 14px;
-            box-shadow: inset 10px 0px 0px 0px rgb(210, 25, 195);
+        14% {
+            box-shadow: inset -3px 2.5px 0px 0px rgb(234, 199, 25),
+                inset 1.5px -5px 0px 0px rgb(210, 25, 195),
+                inset 2.5px -5px 0px 0px rgb(32, 42, 185);
         }
-        5% {
-            translate: 16px;
-            box-shadow: inset -10px 0px 0px 0px rgb(32, 42, 185);
+        20% {
+            box-shadow: inset 1.5px -5px 0px 0px rgb(234, 199, 25),
+                inset 1.5px -7.5px 0px 0px rgb(210, 25, 195),
+                inset -3px 2.5px 0px 0px rgb(32, 42, 185);
         }
-        9% {
-            translate: -12px;
-            box-shadow: inset 3px 5px 0px 0px rgb(210, 25, 195);
+        40% {
+            box-shadow: inset -7.5px 1.5px 0px 0px rgb(234, 199, 25),
+                inset 2.5px -5px 0px 0px rgb(210, 25, 195),
+                inset 3px -2.5px 0px 0px rgb(32, 42, 185);
         }
-        12% {
-            translate: -14px;
-            box-shadow: inset -10px -5px 0px 0px rgb(32, 42, 185);
+        49% {
+            box-shadow: inset 2.5px 0px 0px 0px rgb(234, 199, 25),
+                inset 2.5px -5px 0px 0px rgb(210, 25, 195),
+                inset -5px 2.5px 0px 0px rgb(32, 42, 185);
         }
-        15% {
-            translate: 15px;
-            box-shadow: inset 0px -15px 0px 0px rgb(210, 25, 55);
+        50% {
+            box-shadow: inset -2.5px 0px 0px 0px rgb(234, 199, 25),
+                inset -2.5px 5px 0px 0px rgb(210, 25, 195),
+                inset 5px -7.5px 0px 0px rgb(32, 42, 185);
         }
-        16% {
-            translate: 0px;
+        100% {
             box-shadow: none;
         }
     }
@@ -276,16 +286,27 @@ const sphereDimPx = `${sphereDim}px`;
     #sphere-main {
         /* clip-path: polygon(0 59%, 100% 30%, 100% 0, 100% 60%); */
         clip-path: polygon(0 0, 100% 0, 100% 34%, 0 53%);
-        animation: glitchSphereKeyframe 1000ms infinite;
+        animation: glitchSphereKeyframe 500ms infinite;
+        translate: -2px;
+    }
+
+    .sphere-main-transit {
+        translate: 0px 10px;
+    }
+
+    .sphere-clone-C-transit {
+        translate: 0px -10px;
     }
     #sphere-clone-A {
         clip-path: polygon(100% 75%, 100% 34%, 0 53%);
-        animation: glitchSphereKeyframe 1.2s infinite;
+        animation: glitchSphereKeyframe 300ms infinite;
+        translate: 2px;
     }
 
     #sphere-clone-B {
         clip-path: polygon(100% 75%, 100% 100%, 0% 100%, 0 53%);
-        animation: glitchSphereKeyframe 900ms infinite;
+        animation: glitchSphereKeyframe 800ms infinite;
+        translate: 5px;
     }
 </style>
 
@@ -327,18 +348,45 @@ const sphereDimPx = `${sphereDim}px`;
     let abslastDeltaXY = 0;
 
     let mainHeaderOver = false;
+
     const handleElementToShow = (
         newPageToShow: (typeof pages)[0],
-        oldPage: (typeof pages)[0]
+        oldPage: (typeof pages)[0],
+        newPageIndex: number,
+        oldPageIndex: number,
+        pagesArr: Array<{ name: string }>
     ) => {
-        console.log("new page to show", newPageToShow);
-        const oldPageCardRef = document.getElementById(`${oldPage.name}`);
-        const oldPageCardRefCopy = document.getElementById(
-            `${oldPage.name}-copy`
-        );
-        const newPageCardRef = document.getElementById(
-            `${newPageToShow.name}`
-        )!;
+        let newPageCardRef;
+        let newPageCardRefCopy;
+        let oldPageCardRef;
+        let oldPageCardRefCopy;
+        for (let i = 0; i < pagesArr.length; i++) {
+            if (i === newPageIndex) {
+                newPageCardRef = document.getElementById(
+                    `${newPageToShow.name}`
+                )!;
+                newPageCardRefCopy = document.getElementById(
+                    `${newPageToShow.name}-copy`
+                )!;
+                newPageCardRef.style.zIndex = "90";
+                newPageCardRefCopy.style.zIndex = "90";
+            } else if (i === oldPageIndex) {
+                oldPageCardRef = document.getElementById(`${oldPage.name}`)!;
+                oldPageCardRefCopy = document.getElementById(
+                    `${oldPage.name}-copy`
+                )!;
+                oldPageCardRef.style.zIndex = "100";
+                oldPageCardRefCopy.style.zIndex = "100";
+            } else {
+                document.getElementById(pagesArr[i].name)!.style.zIndex = "80";
+                document.getElementById(
+                    `${pagesArr[i].name}-copy`
+                )!.style.zIndex = "80";
+            }
+        }
+
+        newPageCardRef!.classList.remove("leave");
+        newPageCardRefCopy!.classList.remove("leave");
 
         oldPageCardRef!.classList.add("leave");
         oldPageCardRefCopy!.classList.add("leave");
@@ -371,7 +419,13 @@ const sphereDimPx = `${sphereDim}px`;
         const newPageToShow = pagesArr[newPageIndex];
         const oldPage = pagesArr[oldPageIndex];
 
-        handleElementToShow(newPageToShow, oldPage);
+        handleElementToShow(
+            newPageToShow,
+            oldPage,
+            newPageIndex,
+            oldPageIndex,
+            pagesArr
+        );
     };
 
     mainElement!.addEventListener("wheel", (ev) => {
