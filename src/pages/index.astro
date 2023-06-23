@@ -1,51 +1,76 @@
 ---
-import Layout from '../layouts/LayoutIntro.astro';
-import Banner from "../components/Banner/banner.astro"
-import "./base.css"
+import Layout from "../layouts/LayoutIntro.astro";
+import Banner from "../components/Banner/banner.astro";
+import "../styles/base.css";
 ---
 
 <script>
 	import { $isIntroDone } from "@stores/store";
 
-	$isIntroDone.listen(val => {
-		if (val){
-			const buttons= document.querySelectorAll("button.visibleLater")
-			for (const button of buttons){
-				const buttonElement: HTMLButtonElement = button as HTMLButtonElement
-				buttonElement.classList.add("opacity-100")
-				buttonElement.disabled = false
-				switch (buttonElement.id){
+	$isIntroDone.listen((val) => {
+		if (val) {
+			const buttons = document.querySelectorAll("button.visibleLater");
+			for (const button of buttons) {
+				const buttonElement: HTMLButtonElement =
+					button as HTMLButtonElement;
+				buttonElement.classList.add("opacity-100");
+				buttonElement.disabled = false;
+				switch (buttonElement.id) {
 					case "simple":
-						buttonElement.classList.add("animate-slideFromLeft")
+						buttonElement.classList.add("animate-slideFromLeft");
 						buttonElement.addEventListener("animationend", () => {
-							buttonElement.classList.remove("animate-slideFromLeft")
-						})
-						break
+							buttonElement.classList.remove(
+								"animate-slideFromLeft"
+							);
+						});
+						break;
 					case "chaotic":
-						buttonElement.classList.add("animate-chaotic")
+						buttonElement.classList.add("animate-chaotic");
 						buttonElement.addEventListener("animationend", () => {
-							buttonElement.classList.remove("animate-chaotic")
-						})
-						break
+							buttonElement.classList.remove("animate-chaotic");
+						});
+						break;
 					case "ricky":
-						break
+						break;
 					default:
-						break
+						break;
 				}
 			}
 		}
-	})
+	});
 </script>
 
 <Layout title="Entrance of portfolio">
-	<main class="flex flex-col md:justify-center items-center h-screen w-screen">
+	<main
+		class="flex flex-col md:justify-center items-center h-screen w-screen"
+	>
 		<div class="justify-center items-center flex">
 			<Banner />
 		</div>
-		<div class="flex flex-col md:flex-row items-center md:justify-around justify-between w-full md:mt-20 mt-16">
-			<button disabled id="simple" onclick="window.location.href='./simple'" class="btn btn-primary visibleLater transition-opacity mb-5">Simple Portfolio</button>
-			<button disabled id="chaotic" class="btn btn-accent visibleLater transition-opacity mb-5">Not option 1</button>
-			<button disabled id="ricky" class="btn btn-secondary visibleLater transition-opacity duration-[2.2s] mb-5">??????</button>
+		<div
+			class="flex flex-col md:flex-row items-center md:justify-around justify-between w-full md:mt-20 mt-16"
+		>
+			<button
+				disabled
+				id="simple"
+				onclick="
+				window.location.href = './simple'
+"
+				class="btn btn-primary visibleLater transition-opacity mb-5"
+				>Simple Portfolio</button
+			>
+			<button
+				disabled
+				id="chaotic"
+				class="btn btn-accent visibleLater transition-opacity mb-5"
+				>Not option 1</button
+			>
+			<button
+				disabled
+				id="ricky"
+				class="btn btn-secondary visibleLater transition-opacity duration-[2.2s] mb-5"
+				>??????</button
+			>
 		</div>
 	</main>
 </Layout>
@@ -60,6 +85,4 @@ import "./base.css"
 	.visibleLater {
 		opacity: 0;
 	}
-
 </style>
-

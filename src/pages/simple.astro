@@ -4,9 +4,8 @@ import SimpleIntro from "../components/simplePageComponents/SimpleIntro.astro";
 import SimpleProjects from "../components/simplePageComponents/SimpleProjects.astro";
 import SimpleContact from "../components/simplePageComponents/SimpleContact.astro";
 import GlitchText from "../components/Glitch/GlitchText.astro";
-import GlitchSphere from "../components/Glitch/GlitchSphere.astro";
 import CutCard from "../components/Card/CutCard/CutCard.astro";
-import "./base.css";
+import "../styles/base.css";
 export interface Props {
     sphereDim: string;
 }
@@ -194,6 +193,29 @@ const sphereDimPx = `${sphereDim}px`;
         }
     }
 
+    @keyframes glitchSphereKeyframe {
+        0% {
+            translate: 0px;
+        }
+        14% {
+            translate: 4px;
+        }
+        15% {
+            translate: 6px;
+        }
+        49% {
+            translate: -2px;
+        }
+        50% {
+            translate: -4px;
+        }
+        99% {
+            translate: 5px;
+        }
+        100% {
+        }
+    }
+
     .enter-in {
         animation: enterin 1s;
         animation-fill-mode: forwards;
@@ -247,13 +269,16 @@ const sphereDimPx = `${sphereDim}px`;
     #sphere-main {
         /* clip-path: polygon(0 59%, 100% 30%, 100% 0, 100% 60%); */
         clip-path: polygon(0 0, 100% 0, 100% 34%, 0 53%);
+        animation: glitchSphereKeyframe 1000ms infinite;
     }
     #sphere-clone-A {
         clip-path: polygon(100% 75%, 100% 34%, 0 53%);
+        animation: glitchSphereKeyframe 1.2s infinite;
     }
 
     #sphere-clone-B {
         clip-path: polygon(100% 75%, 100% 100%, 0% 100%, 0 53%);
+        animation: glitchSphereKeyframe 900ms infinite;
     }
 </style>
 
