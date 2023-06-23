@@ -1,0 +1,54 @@
+---
+const { class: className, id: id } = Astro.props;
+---
+
+<div class="h-fit w-fit">
+    <div class=` ${className} ` id=`${id}`></div>
+    <div
+        class=` w-[150px] h-[150px] rounded-[50%] bg-[rgb(231,234,231)]`
+        id="mini-sphere"
+    >
+    </div>
+
+    <script>
+        // const miniSphere = document.getElementById(
+        //     "mini-sphere"
+        // ) as HTMLElement;
+        // const glitchWidth = 10;
+        // let j = 0;
+        // setInterval(() => {
+        //     miniSphere.style.clipPath = `inset(${j}% 0 ${90 - j}% 0)`;
+        //     miniSphere.style.transform = "scale(1.09)";
+        //     j = ++j % 90;
+        // }, 40);
+    </script>
+    <!-- <style>
+    @keyframes glitchyOpacity {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes glitchyTranslate {
+        0% {
+            translate: 0px;
+        }
+        5% {
+            translate: 10px;
+        }
+        50% {
+            translate: 10px;
+        }
+        100% {
+            translate: 0px;
+        }
+    }
+    /* .glitchSphere {
+        animation: glitchyOpacity 100ms linear infinite,
+            glitchyTranslate 200ms linear infinite;
+    } */
+</style> -->
+</div>

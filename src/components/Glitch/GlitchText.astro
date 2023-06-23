@@ -2,9 +2,7 @@
 const { textToShow, class: className } = Astro.props;
 ---
 
-<h1
-    class={`glitch absolute text-[6rem] md:text-[8rem] text-black bottom-[50vh] right-[50vw] translate-x-1/2 translate-y-1/2 font-extrabold ${className}`}
->
+<h1 class={`glitch absolute ${className} `}>
     <span class="absolute top-0 left-0" aria-hidden="true">{textToShow}</span>
     {textToShow}
     <span class="absolute top-0 left-0" aria-hidden="true">{textToShow}</span>

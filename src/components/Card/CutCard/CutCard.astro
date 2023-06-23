@@ -39,7 +39,7 @@ const { id, class: className } = Astro.props;
             transform: translateY(-10px);
         }
         100% {
-            transform: translate(-200vw, -10px);
+            transform: translate(-200vw, -10px) rotateX(30deg);
         }
     }
 
@@ -48,7 +48,7 @@ const { id, class: className } = Astro.props;
             transform: translateY(10px);
         }
         100% {
-            transform: translate(200vw, 10px);
+            transform: translate(200vw, 10px) rotateX(30deg);
         }
     }
 
@@ -68,20 +68,10 @@ const { id, class: className } = Astro.props;
     }
 
     .leave.main-slot {
-        /* transform: translateX(-100vw) rotateY(90deg); */
         animation: leftKf 1s linear forwards;
     }
 
     .leave.copy-slot {
-        /* transform: translateX(200vw) rotateY(90deg); */
         animation: rightKf 1s linear forwards;
     }
-
-    /* .container.leave {
-        transform: translateX(100);
-    } */
-
-    /* .rotate {
-        transform: rotateY(90deg);
-    } */
 </style>
