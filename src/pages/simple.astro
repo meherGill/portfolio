@@ -348,7 +348,7 @@ const sphereDimPx = `${sphereDim}px`;
     let abslastDeltaXY = 0;
 
     let mainHeaderOver = false;
-
+    let wheelEnabled = true;
     const handleElementToShow = (
         newPageToShow: (typeof pages)[0],
         oldPage: (typeof pages)[0],
@@ -375,8 +375,8 @@ const sphereDimPx = `${sphereDim}px`;
                 oldPageCardRefCopy = document.getElementById(
                     `${oldPage.name}-copy`
                 )!;
-                oldPageCardRef.style.zIndex = "100";
-                oldPageCardRefCopy.style.zIndex = "100";
+                oldPageCardRef!.style.zIndex = "100";
+                oldPageCardRefCopy!.style.zIndex = "100";
             } else {
                 document.getElementById(pagesArr[i].name)!.style.zIndex = "80";
                 document.getElementById(
@@ -387,10 +387,14 @@ const sphereDimPx = `${sphereDim}px`;
 
         newPageCardRef!.classList.remove("leave");
         newPageCardRefCopy!.classList.remove("leave");
-
         oldPageCardRef!.classList.add("leave");
         oldPageCardRefCopy!.classList.add("leave");
-
+        setTimeout(() => {
+            newPageCardRef!.style.zIndex = 100;
+            newPageCardRefCopy!.style.zIndex = 100;
+            oldPageCardRef!.style.zIndex = 90;
+            oldPageCardRefCopy!.style.zIndex = 90;
+        }, 100);
         const classToRemove = `sphere-${oldPage.name}`;
         const classToAdd = `sphere-${newPageToShow.name}`;
 
@@ -431,7 +435,7 @@ const sphereDimPx = `${sphereDim}px`;
     mainElement!.addEventListener("wheel", (ev) => {
         ev.preventDefault();
         const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
-        if (mainHeaderOver) {
+        if (mainHeaderOver && wheelEnabled) {
             if (absEvVal > 75) {
                 if (absEvVal > abslastDeltaXY) {
                     switchy = true;
@@ -466,17 +470,10 @@ const sphereDimPx = `${sphereDim}px`;
                 el.classList.remove("out");
             });
 
-            const glitchTextEl = document.querySelector(
-                "h1.glitch"
-            )! as HTMLElement;
-
-            glitchTextEl.style.opacity = "0";
-
             //remove glitch effect in 1.5s
             setTimeout(() => {
                 mainHeaderOver = true;
-                glitchTextEl.classList.remove("glitch");
-                glitchTextEl.style.opacity = "1";
+
                 // sphereIdEl!.classList.add("glitchSphere");
             }, 1500);
         }
