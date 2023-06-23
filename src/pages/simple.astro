@@ -144,7 +144,6 @@ const sphereDimPx = `${sphereDim}px`;
         border-radius: 50%;
         animation-fill-mode: forwards;
         transition: transform 1s;
-        position: relative;
     }
 
     .sphereStyle::after {
@@ -196,23 +195,31 @@ const sphereDimPx = `${sphereDim}px`;
     @keyframes glitchSphereKeyframe {
         0% {
             translate: 0px;
+            box-shadow: inset 10px 0px 0px 0px rgb(210, 25, 55);
         }
-        14% {
-            translate: 4px;
+        4% {
+            translate: 14px;
+            box-shadow: inset 10px 0px 0px 0px rgb(210, 25, 195);
+        }
+        5% {
+            translate: 16px;
+            box-shadow: inset -10px 0px 0px 0px rgb(32, 42, 185);
+        }
+        9% {
+            translate: -12px;
+            box-shadow: inset 3px 5px 0px 0px rgb(210, 25, 195);
+        }
+        12% {
+            translate: -14px;
+            box-shadow: inset -10px -5px 0px 0px rgb(32, 42, 185);
         }
         15% {
-            translate: 6px;
+            translate: 15px;
+            box-shadow: inset 0px -15px 0px 0px rgb(210, 25, 55);
         }
-        49% {
-            translate: -2px;
-        }
-        50% {
-            translate: -4px;
-        }
-        99% {
-            translate: 5px;
-        }
-        100% {
+        16% {
+            translate: 0px;
+            box-shadow: none;
         }
     }
 

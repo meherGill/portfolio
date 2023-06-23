@@ -13,6 +13,7 @@ import "../styles/base.css";
 			for (const button of buttons) {
 				const buttonElement: HTMLButtonElement =
 					button as HTMLButtonElement;
+				buttonElement.classList.remove("visibleLater");
 				buttonElement.classList.add("opacity-100");
 				buttonElement.disabled = false;
 				switch (buttonElement.id) {
@@ -55,7 +56,7 @@ import "../styles/base.css";
 				id="simple"
 				onclick="
 				window.location.href = './simple'
-"
+				"
 				class="btn btn-primary visibleLater transition-opacity mb-5"
 				>Simple Portfolio</button
 			>
