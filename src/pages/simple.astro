@@ -66,21 +66,24 @@ const sphereDimPx = `${sphereDim}px`;
         />
 
         <CutCard class="about z-[100] out bg-black" id="aboutCard">
-            <SimpleIntro />
+            <SimpleIntro name="main" />
+            <SimpleIntro name="copy" />
         </CutCard>
 
         <CutCard
             id="projectsCard"
             class="projects absolute z-[90] out bg-slate-900"
         >
-            <SimpleProjects />
+            <SimpleProjects id="projects-main" name="main" />
+            <SimpleProjects id="projects-copy" name="copy" />
         </CutCard>
 
         <CutCard
             id="contactCard"
             class="projects absolute z-[80] out bg-stone-900"
         >
-            <SimpleContact />
+            <SimpleContact name="main" />
+            <SimpleContact name="copy" />
         </CutCard>
     </main>
 </Layout>

@@ -24,13 +24,13 @@ const { id, class: className } = Astro.props;
     id=`${id}`
     class=`main-slot absolute w-full h-full flex justify-center items-center ${className}`
 >
-    <slot />
+    <slot name="main" />
 </div>
 <div
     id=`${id}-copy`
     class=`copy-slot absolute w-full h-full flex justify-center items-center ${className}`
 >
-    <slot />
+    <slot name="copy" />
 </div>
 
 <style>
