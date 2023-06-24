@@ -3,33 +3,32 @@ import "./FlipCard.css";
 
 export default ({ id, children }: { id: string; children: any }) => {
     const cardRef = React.useRef<any>(null);
+    console.log("id id", id);
+    // useEffect(() => {
+    //     (cardRef.current as HTMLElement).addEventListener("mouseenter", () => {
+    //         console.log("hover");
+    //     });
 
-    useEffect(() => {
-        (cardRef.current as HTMLElement).addEventListener("mouseenter", () => {
-            console.log("hover");
-        });
+    //     (cardRef.current as HTMLElement).addEventListener("mouseleave", () => {
+    //         console.log("hover off");
+    //     });
 
-        (cardRef.current as HTMLElement).addEventListener("mouseleave", () => {
-            console.log("hover off");
-        });
-
-        const counterPartCardRef = (function () {
-            const splitted_id = id.split("-");
-            if (splitted_id.includes("copy")) {
-                const index = splitted_id.indexOf("copy");
-                splitted_id[index] = "main";
-            } else {
-                const index = splitted_id.indexOf("main");
-                splitted_id[index] = "copy";
-                console.log(splitted_id.join("-"));
-            }
-            const idOfOtherCard = splitted_id.join("-");
-            return document.getElementById(idOfOtherCard);
-        })();
-        console.log("for id", id, counterPartCardRef);
-    }, []);
+    //     const counterPartCardRef = (function () {
+    //         const splitted_id = id.split("-");
+    //         if (splitted_id.includes("copy")) {
+    //             const index = splitted_id.indexOf("copy");
+    //             splitted_id[index] = "main";
+    //         } else {
+    //             const index = splitted_id.indexOf("main");
+    //             splitted_id[index] = "copy";
+    //         }
+    //         const idOfOtherCard = splitted_id.join("-");
+    //         return document.getElementById(idOfOtherCard);
+    //     })();
+    //     console.log("for id", id, counterPartCardRef);
+    // }, []);
     return (
-        <div id={id} ref={cardRef} className="card">
+        <div ref={cardRef} className="card">
             <div className="card__content">
                 <div className="card__front"></div>
 
