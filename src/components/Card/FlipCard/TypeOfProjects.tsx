@@ -19,7 +19,7 @@ const getAnarchyChessJSX = () => (
                 className="text-orange-500 border-b-2 border-orange-500 pb-1"
                 href="https://anarchy-chess.netlify.app/"
             >
-                Try it here
+                Try the chess game
             </a>
         </p>
         <p>
@@ -46,7 +46,7 @@ const getFourInARowJSX = () => (
                 className="text-orange-500 border-b-2 border-orange-500 pb-1"
                 href="https://mehergill.github.io/"
             >
-                Try it here
+                Try the connect 4 game
             </a>
         </p>
         <p>
