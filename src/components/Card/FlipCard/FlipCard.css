@@ -23,6 +23,12 @@
     transform-style: preserve-3d;
     transition: transform 1s;
 
+    @media screen and (max-width: 400px) {
+        height: 200px;
+        /* width: ; */
+        font-size: small;
+    }
+
 }
 
 .rotate__card {

@@ -19,7 +19,7 @@ const textToLoadArr = Array.from(textToLoad);
 
 <div id="#banner" class="flex items-center lg:flex-row flex-col justify-center">
     <div class="sprite-animation-container lg:order-2 relative">
-        <div class="character-spritesheet relative right-20 top-20">
+        <div class="character-spritesheet relative right-20 top-16 md:top-20">
             <img
                 src="./programming_spritesheet_new.png"
                 alt="programmer_gif.gif"
@@ -39,6 +39,11 @@ const textToLoadArr = Array.from(textToLoad);
     :root {
         --pixel-size: 8;
         --image-dim: 64px;
+
+        @media screen and (max-width: 400px) {
+            --pixel-size: 5;
+            --image-dim: 64px;
+        }
     }
     .sprite-animation-container {
         width: calc(var(--image-dim) * var(--pixel-size));
