@@ -10,7 +10,7 @@ const getAnarchyChessJSX = () => (
         <p className="text-center">
             Its a chess game based on custom rules from r/anarchyChess.
             <br />
-            Due to cutom rules it had to be built from scratch without using
+            Due to custom rules it had to be built from scratch without using
             libraries like chess.js
         </p>
         <p>
