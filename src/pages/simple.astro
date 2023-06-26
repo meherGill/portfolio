@@ -84,6 +84,10 @@ const sphereDimPx = `${sphereDim}px`;
     .sphere-aboutCard {
         transform: translateY(calc(45vh - var(--sphereDimPx) / 2));
         margin-left: 50px;
+
+        @media screen and (max-width: 400px) {
+            transform: translateY(calc(25vh - var(--sphereDimPx) / 2));
+        }
     }
 
     .sphere-projectsCard {
