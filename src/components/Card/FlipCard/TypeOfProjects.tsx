@@ -6,7 +6,7 @@ export enum TypeOfProjectsEnum {
 }
 
 const getAnarchyChessJSX = () => (
-    <div className="content__description  px-5 [&>p]:mt-3">
+    <div className="content__description  px-5 [&>p]:mt-3 ">
         <p className="text-center">
             Its a chess game based on custom rules from r/anarchyChess.
             <br />
@@ -35,7 +35,7 @@ const getAnarchyChessJSX = () => (
 );
 
 const getFourInARowJSX = () => (
-    <div className="content__description px-5">
+    <div className="content__description px-5 [&>p]:mt-3 ">
         <p>
             A connect-4 game that was built overnight in 6 hours, it hasnt been
             updated since because its a memento to the first app that I ever
@@ -61,7 +61,6 @@ const getFourInARowJSX = () => (
     </div>
 );
 
-// const values : { [key in ]}
 type ITypeOfProjectsMapper = {
     [key in TypeOfProjectsEnum]: {
         jsx: () => JSX.Element;

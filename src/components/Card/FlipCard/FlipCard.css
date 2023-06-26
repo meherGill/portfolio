@@ -25,7 +25,6 @@
 
     @media screen and (max-width: 400px) {
         height: 200px;
-        /* width: ; */
         font-size: small;
     }
 
@@ -43,12 +42,24 @@
     bottom: 0;
     left: 0;
     right: 0;
+    -webkit-backface-visibility: hidden;
+    visibility: visible;
     backface-visibility: hidden;
     transform-style: preserve-3d;
     display: grid;
     align-content: center;
+   
 }
 
+.front__card {
+    scale: 1;
+    transition: scale 500ms;
+}
+
+.rotate__card .front__card{
+   scale: 0;
+   transition: scale 500ms 500ms
+}
 
 .card__back {
     transform: rotateY(0.5turn);

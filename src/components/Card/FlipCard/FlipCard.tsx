@@ -61,7 +61,7 @@ export default ({
                 id={passedId}
                 className="card__content rounded-md bg-slate-900"
             >
-                <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col items-stretch justify-center">
+                <div className="front__card absolute top-0 bottom-0 left-0 right-0 flex flex-col items-stretch justify-center">
                     <div
                         className="rounded-md"
                         style={{
