@@ -9,7 +9,8 @@ const { id } = Astro.props;
         <h2 class="page-title">Projects</h2>
     </div>
     <div
-        class="project-container flex justify-between items-center flex-wrap px-10 overflow-y-scroll h-[1000px]"
+        id="project-container"
+        class="flex justify-between items-center flex-wrap px-10 overflow-y-scroll"
     >
         <FlipCard
             passedId={`${id}-Flipcard-A`}
@@ -40,6 +41,13 @@ const { id } = Astro.props;
         </FlipCard>
     </div>
 </div>
+
+<script>
+    const projectContainer = document.getElementById("#projectContainer");
+    projectContainer?.addEventListener("scroll", (e) => {
+        console.log("scroll", e);
+    });
+</script>
 
 <style lang="scss">
     .card__title {
