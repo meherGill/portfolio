@@ -1,14 +1,14 @@
 ---
-const { textToShow, class: className } = Astro.props;
+const { textToShow, class: className, id: id } = Astro.props;
 ---
 
-<h1 class={`glitch absolute ${className} `}>
+<h1 id={id} class={`glitch absolute ${className} `}>
     <span class="absolute top-0 left-0" aria-hidden="true">{textToShow}</span>
     {textToShow}
     <span class="absolute top-0 left-0" aria-hidden="true">{textToShow}</span>
 </h1>
 
-<style>
+<style is:global>
     @keyframes glitch {
         0% {
             text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
@@ -67,5 +67,9 @@ const { textToShow, class: className } = Astro.props;
         clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
         transform: translate(0.0125em, 0.025em);
         opacity: 0.8;
+    }
+
+    .notVisible {
+        animation: none;
     }
 </style>
