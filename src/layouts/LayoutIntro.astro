@@ -13,6 +13,7 @@ const { title } = Astro.props;
 	const themeChangerButton = document.querySelector(
 		"#themeChanger"
 	) as HTMLInputElement;
+
 	themeChangerButton.addEventListener("change", function () {
 		if (this.checked) {
 			this.classList.remove("unchecked");
@@ -24,6 +25,45 @@ const { title } = Astro.props;
 	});
 	$theme.subscribe((val) => {
 		document.documentElement.setAttribute("data-theme", val);
+	});
+
+	const themeChangerDiv = document.querySelector(
+		"#themeChangerDiv"
+	) as HTMLElement;
+
+	themeChangerDiv!.addEventListener("mouseover", (mouse) => {
+		const boundingClient = themeChangerButton.getBoundingClientRect();
+
+		let width = boundingClient.right - boundingClient.left;
+		let height = boundingClient.bottom - boundingClient.top;
+
+		const centerY = boundingClient.top + height / 2;
+		const centerX = boundingClient.x + width / 2;
+
+		const currTranslate = window
+			.getComputedStyle(themeChangerDiv)
+			.translate.split(" ");
+
+		let toTranslateX = "";
+		let toTranslateY = "";
+		if (currTranslate.length > 1) {
+			const currTranslate_x = parseFloat(currTranslate[0]);
+			const currTranslate_y = parseFloat(currTranslate[1]);
+			if (mouse.screenX < centerX) {
+				toTranslateX = `${currTranslate_x + width}px`;
+			} else {
+				toTranslateX = `${currTranslate_x - width}px`;
+			}
+
+			if (mouse.screenY < centerY) {
+				toTranslateY = `${currTranslate_y + height}px`;
+			} else {
+				toTranslateY = `${currTranslate_y - height}px`;
+			}
+			themeChangerDiv!.style.translate = `${toTranslateX} ${toTranslateY}`;
+		} else {
+			themeChangerDiv!.style.translate = `1px 1px`;
+		}
 	});
 </script>
 
@@ -40,7 +80,10 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<div class="absolute right-10 top-10 flex flex-col items-center">
+		<div
+			id="themeChangerDiv"
+			class="absolute right-10 top-10 flex flex-col items-center p-5 z-50"
+		>
 			<input
 				id="themeChanger"
 				type="checkbox"
@@ -81,5 +124,9 @@ const { title } = Astro.props;
 <style>
 	#themeChanger.unchecked {
 		background-color: rgb(9, 168, 9);
+	}
+
+	#themeChangerDiv {
+		transition: 100ms translate;
 	}
 </style>

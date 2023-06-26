@@ -411,6 +411,34 @@ const sphereDimPx = `${sphereDim}px`;
         );
     };
 
+    const ifNotMainHeaderOver = () => {
+        sphereElements.forEach((element) => {
+            element!.classList.remove("sphere-initial", "z-10");
+            element!.classList.add("sphere-aboutCard", "z-[999]");
+        });
+
+        const allOutElements = document.querySelectorAll(".out");
+        allOutElements!.forEach((el) => {
+            el.classList.remove("out");
+        });
+
+        //remove glitch effect in 1.5s
+        setTimeout(() => {
+            mainHeaderOver = true;
+
+            document
+                .getElementById("main-glitch-text")!
+                .classList.add("notVisible");
+        }, 1500);
+    };
+
+    window!.addEventListener("touchmove", (ev) => {
+        if (mainHeaderOver) {
+            transitionToNextSection(1, currentPageIndex, pages);
+        } else {
+            ifNotMainHeaderOver();
+        }
+    });
     mainElement!.addEventListener("wheel", (ev) => {
         ev.preventDefault();
         const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
@@ -437,24 +465,7 @@ const sphereDimPx = `${sphereDim}px`;
                 abslastDeltaXY = Math.abs(ev.deltaY + ev.deltaX);
             }
         } else {
-            sphereElements.forEach((element) => {
-                element!.classList.remove("sphere-initial", "z-10");
-                element!.classList.add("sphere-aboutCard", "z-[999]");
-            });
-
-            const allOutElements = document.querySelectorAll(".out");
-            allOutElements!.forEach((el) => {
-                el.classList.remove("out");
-            });
-
-            //remove glitch effect in 1.5s
-            setTimeout(() => {
-                mainHeaderOver = true;
-
-                document
-                    .getElementById("main-glitch-text")!
-                    .classList.add("notVisible");
-            }, 1500);
+            ifNotMainHeaderOver();
         }
     });
 </script>
