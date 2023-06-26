@@ -36,7 +36,7 @@ const { id, class: className } = Astro.props;
 <style>
     @keyframes leftKf {
         45% {
-            transform: translateY(-10px);
+            transform: translateY(50px) translateX(-100px);
         }
         100% {
             transform: translate(-200vw, -10px) rotateX(30deg);
@@ -45,7 +45,7 @@ const { id, class: className } = Astro.props;
 
     @keyframes rightKf {
         45% {
-            transform: translateY(10px);
+            transform: translateY(-50px) translateX(100px);
         }
         100% {
             transform: translate(200vw, 10px) rotateX(30deg);
@@ -60,11 +60,11 @@ const { id, class: className } = Astro.props;
     }
 
     .main-slot {
-        /* clip-path: polygon(0 0, 100% 0%, 0% 100%); */
+        clip-path: polygon(0 0, 100% 0%, 0% 100%);
     }
 
     .copy-slot {
-        /* clip-path: polygon(100% 100%, 100% 0%, 0% 100%); */
+        clip-path: polygon(100% 100%, 100% 0%, 0% 100%);
     }
 
     .leave.main-slot {
@@ -75,3 +75,5 @@ const { id, class: className } = Astro.props;
         animation: rightKf 700ms linear forwards;
     }
 </style>
+
+<script></script>

@@ -6,11 +6,11 @@ const { id } = Astro.props;
 
 <div class="grid grid-flow-row pt-20 lg m-auto h-screen w-screen">
     <div class="w-full h-contain flex justify-center items-start">
-        <h2 class="page-title">Projects</h2>
+        <h2 class="page-title">Featured<br />Projects</h2>
     </div>
     <div
         id="project-container"
-        class="flex justify-between items-center flex-wrap px-10 overflow-y-scroll"
+        class="flex justify-around items-center flex-wrap px-10 overflow-y-scroll"
     >
         <FlipCard
             passedId={`${id}-Flipcard-A`}
@@ -30,24 +30,8 @@ const { id } = Astro.props;
                 CONNECT <br /> FOUR
             </h2>
         </FlipCard>
-        <FlipCard
-            passedId={`${id}-Flipcard-B`}
-            typeOfProject={TypeOfProjectsEnum.FOUR_IN_A_ROW}
-            client:only="react"
-        >
-            <h2 class="card__title text-2xl font-bold">
-                CONNECT <br /> FOUR
-            </h2>
-        </FlipCard>
     </div>
 </div>
-
-<script>
-    const projectContainer = document.getElementById("#projectContainer");
-    projectContainer?.addEventListener("scroll", (e) => {
-        console.log("scroll", e);
-    });
-</script>
 
 <style lang="scss">
     .card__title {
