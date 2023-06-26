@@ -1,106 +1,84 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import "./FlipCard.css";
-
-export default ({ id, children }: { id: string; children: any }) => {
+import TypeOfProjectsMapper, { TypeOfProjectsEnum } from "./TypeOfProjects";
+export default ({
+    passedId,
+    children,
+    typeOfProject,
+}: {
+    passedId: string;
+    children: any;
+    typeOfProject: TypeOfProjectsEnum;
+}) => {
+    const cardRefContent = React.useRef<any>(null);
     const cardRef = React.useRef<any>(null);
-    console.log("id id", id);
-    // useEffect(() => {
-    //     (cardRef.current as HTMLElement).addEventListener("mouseenter", () => {
-    //         console.log("hover");
-    //     });
+    const typeOfProjectJSX = TypeOfProjectsMapper[typeOfProject];
+    const getCounterCardId = () => {
+        const splitted_id = passedId.split("-");
+        if (splitted_id.includes("copy")) {
+            const index = splitted_id.indexOf("copy");
+            splitted_id[index] = "main";
+        } else {
+            const index = splitted_id.indexOf("main");
+            splitted_id[index] = "copy";
+        }
+        const idOfOtherCard = splitted_id.join("-");
 
-    //     (cardRef.current as HTMLElement).addEventListener("mouseleave", () => {
-    //         console.log("hover off");
-    //     });
+        return document.getElementById(idOfOtherCard);
+    };
 
-    //     const counterPartCardRef = (function () {
-    //         const splitted_id = id.split("-");
-    //         if (splitted_id.includes("copy")) {
-    //             const index = splitted_id.indexOf("copy");
-    //             splitted_id[index] = "main";
-    //         } else {
-    //             const index = splitted_id.indexOf("main");
-    //             splitted_id[index] = "copy";
-    //         }
-    //         const idOfOtherCard = splitted_id.join("-");
-    //         return document.getElementById(idOfOtherCard);
-    //     })();
-    //     console.log("for id", id, counterPartCardRef);
-    // }, []);
+    useEffect(() => {
+        cardRef.current.addEventListener("touchStart", () => {
+            console.log("touched");
+            if (cardRef.current.classList.includes("rotate__card")) {
+                removeRotateCardCallback();
+            } else {
+                addRotateCardCallback();
+            }
+        });
+        cardRef.current.addEventListener("mouseenter", addRotateCardCallback);
+
+        cardRef.current.addEventListener(
+            "mouseleave",
+            removeRotateCardCallback
+        );
+    }, []);
+    const addRotateCardCallback = () => {
+        const otherCardId = getCounterCardId()!;
+        cardRefContent.current.classList.add("rotate__card");
+        otherCardId.classList.add("rotate__card");
+    };
+
+    const removeRotateCardCallback = () => {
+        const otherCardId = getCounterCardId()!;
+        cardRefContent.current.classList.remove("rotate__card");
+        otherCardId.classList.remove("rotate__card");
+    };
     return (
         <div ref={cardRef} className="card">
-            <div className="card__content">
-                <div className="card__front"></div>
+            <div
+                ref={cardRefContent}
+                id={passedId}
+                className="card__content rounded-md bg-slate-900"
+            >
+                <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col items-stretch justify-center">
+                    <div
+                        className="rounded-md"
+                        style={{
+                            background: `url(${typeOfProjectJSX.imageUrl})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            flex: "1",
+                        }}
+                    ></div>
 
-                <div className="card__back"></div>
+                    {children}
+                </div>
+
+                <div className="card__back bg-slate-700 rounded-md">
+                    {typeOfProjectJSX.jsx()}
+                </div>
             </div>
         </div>
     );
 };
-
-// <style lang="scss">
-//     :root {
-//         --level-one: translateZ(3rem);
-//         --level-two: translateZ(6rem);
-//         --level-three: translateZ(9rem);
-
-//         --fw-normal: 400;
-//         --fw-bold: 700;
-
-//         --clr: #b7c9e5;
-//     }
-
-//     *,
-//     *::before,
-//     *::after {
-//         box-sizing: border-box;
-//         margin: 0;
-//     }
-
-//     .card {
-//         width: 400px;
-//     }
-
-//     .card__content {
-//         text-align: center;
-//         position: relative;
-//         padding: 15em 5em;
-//         transition: transform 3s;
-//         // background: pink;
-//         transform-style: preserve-3d;
-//     }
-
-//     .card:hover .card__content {
-//         transform: rotateY(0.5turn);
-//     }
-
-//     .card__front,
-//     .card__back {
-//         position: absolute;
-//         top: 0;
-//         bottom: 0;
-//         left: 0;
-//         right: 0;
-//         backface-visibility: hidden;
-//         transform-style: preserve-3d;
-//         display: grid;
-//         align-content: center;
-//     }
-
-//     .card__front {
-//         background: red;
-//     }
-
-//     .card__back {
-//         transform: rotateY(0.5turn);
-//         color: var(--clr);
-//         background: #333;
-//     }
-
-//     .card__title {
-//         font-size: 3.5rem;
-//         transform: var(--level-three);
-//         order: 2;
-//         text-transform: uppercase;
-//     }
-// </style>

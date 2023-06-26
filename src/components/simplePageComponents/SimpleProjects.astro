@@ -1,30 +1,48 @@
 ---
 import FlipCard from "../Card/FlipCard/FlipCard";
+import { TypeOfProjectsEnum } from "../Card/FlipCard/TypeOfProjects";
 const { id } = Astro.props;
 ---
 
-<div
-    class="flex flex-col items-center justify-start pt-20 lg m-auto h-screen w-screen"
->
-    <h2 class="page-title">Projects</h2>
-    <div class="self-start">
-        <FlipCard id=`Flipcard-A` client:only="react">
-            <h1 class="card__title">Abacaus</h1>
-
-            <h2>BABABA</h2>
+<div class="grid grid-flow-row pt-20 lg m-auto h-screen w-screen">
+    <div class="w-full h-contain flex justify-center items-start">
+        <h2 class="page-title">Projects</h2>
+    </div>
+    <div
+        class="project-container flex justify-between items-center flex-wrap px-10 overflow-y-scroll h-[1000px]"
+    >
+        <FlipCard
+            passedId={`${id}-Flipcard-A`}
+            typeOfProject={TypeOfProjectsEnum.ANARCHY_CHESS}
+            client:only="react"
+        >
+            <h2 class="card__title text-2xl font-bold">
+                ANARCHY <br /> CHESS
+            </h2>
+        </FlipCard>
+        <FlipCard
+            passedId={`${id}-Flipcard-B`}
+            typeOfProject={TypeOfProjectsEnum.FOUR_IN_A_ROW}
+            client:only="react"
+        >
+            <h2 class="card__title text-2xl font-bold">
+                CONNECT <br /> FOUR
+            </h2>
+        </FlipCard>
+        <FlipCard
+            passedId={`${id}-Flipcard-B`}
+            typeOfProject={TypeOfProjectsEnum.FOUR_IN_A_ROW}
+            client:only="react"
+        >
+            <h2 class="card__title text-2xl font-bold">
+                CONNECT <br /> FOUR
+            </h2>
         </FlipCard>
     </div>
 </div>
 
 <style lang="scss">
-    :root {
-        --level-three: translateZ(9rem);
-    }
-
     .card__title {
-        font-size: 3.5rem;
-        transform: var(--level-three);
-        order: 2;
-        text-transform: uppercase;
+        transform: translateZ(100px);
     }
 </style>

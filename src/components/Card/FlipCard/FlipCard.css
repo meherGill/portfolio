@@ -1,10 +1,4 @@
 :root {
-    --level-one: translateZ(3rem);
-    --level-two: translateZ(6rem);
-    --level-three: translateZ(9rem);
-
-    --fw-normal: 400;
-    --fw-bold: 700;
 
     --clr: #b7c9e5;
 }
@@ -17,20 +11,23 @@
 }
 
 .card {
-    width: 400px;
+    width: 300px;
+
 }
 
 .card__content {
     text-align: center;
     position: relative;
-    padding: 15em 5em;
+    height: 300px;
     transition: transform 3s;
-    background: pink;
     transform-style: preserve-3d;
+    transition: transform 1s;
+
 }
 
 .rotate__card {
     transform: rotateY(0.5turn);
+
 }
 
 .card__front,
@@ -46,19 +43,12 @@
     align-content: center;
 }
 
-.card__front {
-    background: red;
-}
 
 .card__back {
     transform: rotateY(0.5turn);
-    color: var(--clr);
-    background: #333;
+    transition: transform 1s;
 }
 
-.card__title {
-    font-size: 3.5rem;
-    transform: var(--level-three);
-    order: 2;
-    text-transform: uppercase;
+.content__description {
+    transform: translateZ(100px);
 }
