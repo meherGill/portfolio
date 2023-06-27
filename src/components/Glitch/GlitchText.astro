@@ -72,4 +72,8 @@ const { textToShow, class: className, id: id } = Astro.props;
     .notVisible {
         animation: none;
     }
+
+    .notVisible > span {
+        animation: none !important;
+    }
 </style>
