@@ -456,7 +456,6 @@ const sphereDimPx = `${sphereDim}px`;
 
     mainElement!.addEventListener("wheel", (ev) => {
         ev.preventDefault();
-        console.log(ev);
         const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
         if (mainHeaderOver && wheelEnabled) {
             if (absEvVal > 0) {
