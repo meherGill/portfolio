@@ -453,11 +453,13 @@ const sphereDimPx = `${sphereDim}px`;
             ifNotMainHeaderOver();
         }
     });
+
     mainElement!.addEventListener("wheel", (ev) => {
         ev.preventDefault();
+        console.log(ev);
         const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
         if (mainHeaderOver && wheelEnabled) {
-            if (absEvVal > 75) {
+            if (absEvVal > 0) {
                 if (absEvVal > abslastDeltaXY) {
                     switchy = true;
                 } else if (absEvVal < abslastDeltaXY && switchy) {
@@ -474,6 +476,8 @@ const sphereDimPx = `${sphereDim}px`;
                     timerTimeout = setTimeout(() => {
                         switchy = false;
                         performLogic = true;
+                        mainElement!.focus();
+                        console.log("done");
                     }, 200);
                 }
                 abslastDeltaXY = Math.abs(ev.deltaY + ev.deltaX);
