@@ -1,12 +1,20 @@
 ---
 import FlipCard from "../Card/FlipCard/FlipCard";
 import { TypeOfProjectsEnum } from "../Card/FlipCard/TypeOfProjects";
+import GlitchText from "../Glitch/GlitchText.astro";
 const { id } = Astro.props;
 ---
 
 <div class="grid grid-flow-row pt-20 lg m-auto h-screen w-screen">
+    <div class="font-bold absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+    S<br />C<br />R<br />O<br />L<br />L
+    </div>
+    <!-- <GlitchText textToShow="S\nC<br />R" class="font-bold absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" id="projectPageScrollGlitch" /> -->
     <div class="w-full h-contain flex justify-center items-start">
+        <div>
         <h2 class="page-title">Featured<br />Projects</h2>
+        <span>(Hover over the cards)</span>
+        </div>
     </div>
     <div
         id="project-container"

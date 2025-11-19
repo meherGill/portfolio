@@ -375,10 +375,10 @@ const sphereDimPx = `${sphereDim}px`;
         oldPageCardRef!.classList.add("leave");
         oldPageCardRefCopy!.classList.add("leave");
         setTimeout(() => {
-            newPageCardRef!.style.zIndex = 100;
-            newPageCardRefCopy!.style.zIndex = 100;
-            oldPageCardRef!.style.zIndex = 90;
-            oldPageCardRefCopy!.style.zIndex = 90;
+            newPageCardRef!.style.zIndex = "100";
+            newPageCardRefCopy!.style.zIndex = "100";
+            oldPageCardRef!.style.zIndex = "90";
+            oldPageCardRefCopy!.style.zIndex = "90";
         }, 100);
         const classToRemove = `sphere-${oldPage.name}`;
         const classToAdd = `sphere-${newPageToShow.name}`;
@@ -454,6 +454,7 @@ const sphereDimPx = `${sphereDim}px`;
         }
     });
 
+    // hijacking the scroll is a very precarious decision which in hindsight i shouldnt have taken
     mainElement!.addEventListener("wheel", (ev) => {
         ev.preventDefault();
         const absEvVal = Math.abs(ev.deltaY + ev.deltaX);
@@ -469,6 +470,11 @@ const sphereDimPx = `${sphereDim}px`;
                             currentPageIndex,
                             pages
                         );
+                        wheelEnabled = false
+                        // kind of setting a lock, if the scroll momentum occours for more than whatever time is mentioned there now, and the user spam scrolls this will get fucked, but why would you do that
+                        setTimeout(() => {
+                            wheelEnabled = true
+                        }, 1000)
                         performLogic = false;
                     }
 
@@ -476,7 +482,7 @@ const sphereDimPx = `${sphereDim}px`;
                         switchy = false;
                         performLogic = true;
                         mainElement!.focus();
-                        console.log("done");
+                        // wheelEnabled=false
                     }, 200);
                 }
                 abslastDeltaXY = Math.abs(ev.deltaY + ev.deltaX);

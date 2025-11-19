@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { $isIntroDone } from "@stores/store";
 
-export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
+export default ({ text, indexes, startNextAnimationAtIndex }: { text: string[]; indexes: number[], startNextAnimationAtIndex: number }) => {
     const indexRef = useRef(1);
     const [textToDisplay, setTextToDisplay] = useState(text[0]);
     const intervalRef = useRef<any>(null);
     const cursorRef = useRef<HTMLSpanElement>(null);
+    if (startNextAnimationAtIndex > indexes.at(-1)!){
+        startNextAnimationAtIndex = indexes.at(-1)!
+    }
 
     const setIntervalAgain = () => {
         removeBlinkAnimation();
@@ -45,13 +48,15 @@ export default ({ text, indexes }: { text: string[]; indexes: number[] }) => {
     }, []);
 
     useEffect(() => {
+        if (textToDisplay.length === startNextAnimationAtIndex){
+            $isIntroDone.set(true);
+        }
         if (textToDisplay.length >= text.length + 2 * (indexes.length - 1)) {
             //completely stop animation
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
             setAnimationToBlink();
-            $isIntroDone.set(true);
         } else if (indexes.includes(indexRef.current)) {
             clearIntervalAgain();
             setAnimationToBlink();

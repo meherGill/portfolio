@@ -3,13 +3,14 @@ import TextLoader from "../textLoader";
 
 const textToLoadInParts = [
     `Hello, I am Meher. A fullstack developer...`,
-    `This is the entrance to my portfolio.`,
-    "Which door would you like to choose?",
+    `This page is quite redundant since you need to click this button`,
+    `to go to the actual portfolio, but I worked really hard on this 2d sprite animation`,
+    `So, it is what it is`
 ];
 const indexesToPauseAt = [];
 let textToLoad = "";
 let lastIndex = 0;
-for (let [index, text] of textToLoadInParts.entries()) {
+for (let [_, text] of textToLoadInParts.entries()) {
     textToLoad += text;
     lastIndex = text.length + lastIndex;
     indexesToPauseAt.push(lastIndex);
@@ -31,6 +32,7 @@ const textToLoadArr = Array.from(textToLoad);
             text={textToLoadArr}
             indexes={indexesToPauseAt}
             client:only="react"
+            startNextAnimationAtIndex={75}
         />
     </div>
 </div>

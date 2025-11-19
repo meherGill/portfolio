@@ -4,7 +4,7 @@ const { textToShow, class: className, id: id } = Astro.props;
 
 <h1 id={id} class={`glitch absolute ${className} `}>
     <span class="absolute top-0 left-0" aria-hidden="true">{textToShow}</span>
-    {textToShow}
+    <span>{textToShow}</span>
     <span class="absolute top-0 left-0" aria-hidden="true">{textToShow}</span>
 </h1>
 
